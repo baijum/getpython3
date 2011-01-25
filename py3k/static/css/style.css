@@ -27,12 +27,12 @@ padding: 33px 0 0 30px;
 font-weight: 600;
 color: #fff;
 font-size: 29px;
-letter-spacing: -2px;
+letter-spacing: 2px;
 line-height: 27px;
 }
 #header h1 a { text-decoration: none; color: #fff; }
 #header h1 a:hover { text-decoration: none; border-bottom: 1px solid #fff; color: #fff; }
-#header h2 { font-size: 21px; padding: 0 0 0 30px; margin: 0; color: #eee; font-weight: 100; letter-spacing: -2px;}
+#header h2 { font-size: 21px; padding: 0 0 0 30px; margin: 0; color: #eee; font-weight: 100; letter-spacing: 1px;}
 
 #headerbottom { 
 background: url(../images/headerbottom.png) no-repeat; padding: 105px 0;
