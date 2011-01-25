@@ -2,6 +2,16 @@ from .application import db
 
 from werkzeug import generate_password_hash, check_password_hash
 
+
+class Distribution(db.Model):
+    __tablename__ = 'distribution'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), unique=True)
+    url = db.Column(db.String(50), unique=True)
+    authors = db.Column(db.String(50), unique=True)
+    summary = db.Column(db.String(50), unique=True)
+
+    
 class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
@@ -28,3 +38,13 @@ class User(db.Model):
 
     def __repr__(self):
         return '<User %r>' % (self.username)
+
+
+class Comments(db.Model):
+    __tablename__ = 'comments'
+    id = db.Column(db.Integer, primary_key=True)
+    distribution_id = db.Column("distribution_id", db.Integer, db.ForeignKey('distribution.id'))
+    user_id = db.Column("user_id", db.Integer, db.ForeignKey('users.id'))
+    comment = db.Column(db.String(5000))
+    status = db.Column(db.Boolean()) #True=Working,False=FAILING
+
