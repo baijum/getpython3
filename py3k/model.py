@@ -12,21 +12,16 @@ class Distribution(db.Model):
 class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
+    openid = db.Column(db.String(200), unique=True)
     username = db.Column(db.String(16), unique=True)
-    pw_hash = db.Column(db.String(80))
-    email = db.Column(db.String(120), unique=True)
-    openid = db.Column(db.String(200))
-    first_name = db.Column(db.String(50))
-    middle_name = db.Column(db.String(50))
-    last_name = db.Column(db.String(50))
+    email = db.Column(db.String(120))
+    fullname = db.Column(db.String(50))
 
-    def __init__(self, username, email, openid, first_name='', middle_name='', last_name=''):
+    def __init__(self, username, email, openid, fullname=''):
         self.username = username
         self.email = email
         self.openid = openid
-        self.first_name = first_name
-        self.middle_name = middle_name
-        self.last_name = last_name
+        self.fullname = fullname
 
     def __repr__(self):
         return '<User %r>' % (self.username)

@@ -42,15 +42,16 @@ def create_profile():
     if g.user is not None or 'openid' not in session:
         return redirect(url_for('index'))
     if request.method == 'POST':
-        name = request.form['name']
+        username = request.form['username']
+        fullname = request.form['fullname']
         email = request.form['email']
-        if not name:
+        if not username:
             flash(u'Error: you have to provide a name')
         elif '@' not in email:
             flash(u'Error: you have to enter a valid email address')
         else:
             flash(u'Profile successfully created')
-            db.session.add(User(name, email, session['openid']))
+            db.session.add(User(username, email, session['openid'], fullname=fullname))
             db.session.commit()
             return redirect(oid.get_next_url())
     return render_template('create_profile.html', next_url=oid.get_next_url())

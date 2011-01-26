@@ -1,13 +1,33 @@
 {% extends "layout.html" %}
-{% block title %}<title>Sign In</title>{% endblock %}
+{% block title %}<title>Login</title>{% endblock %}
 {% block body %}
-  <h2>Sign In</h2>
+  <h2>Login</h2>
   <form action="" method=post>
     {% if error %}<p class=error><strong>Error:</strong> {{ error }}</p>{% endif %}
     <p>
       OpenID:
       <input type=text name=openid size=30>
-      <input type=submit value="Sign in">
+      <input type=submit value="Login">
       <input type=hidden name=next value="{{ next }}">
+    </p>
+    <p>
+      Example OpenIDs (repace USERNAME with your username/screenname):
+      <pre>
+      https://www.google.com/accounts/o8/id
+      http://yahoo.com/
+      http://openid.aol.com/USERNAME
+      http://USERNAME.myopenid.com/
+      http://flickr.com/USERNAME
+      http://www.myspace.com/USERNAME
+      http://technorati.com/people/technorati/USERNAME/
+      http://USERNAME.wordpress.com
+      http://USERNAME.blogspot.com/
+      http://USERNAME.livejournal.com
+      http://claimid.com/USERNAME
+      http://USERNAME.myvidoop.com/
+      http://USERNAME.pip.verisignlabs.com/
+      </pre>
+    </p>
+
   </form>
 {% endblock %}

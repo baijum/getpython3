@@ -59,7 +59,13 @@
             <li><a href="http://wiki.python.org/moin/PortingPythonToPy3k">Porting Python 3</a></li>
             <li><a href="articles.html">More...</a></li>
           </ul>
-
+          <h3>
+            {% if not session.openid %}
+            <a href="{{ url_for('.login') }}">Login</a>
+            {% else %}
+            <a href="{{ url_for('.logout') }}">Logout</a>
+            {% endif %}
+          </h3>
         </div>
 
         <div style="clear: both;"> </div>
