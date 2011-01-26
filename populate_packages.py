@@ -1,3 +1,4 @@
+from py3k.application import db
 from py3k.model import Distribution
 import xmlrpclib
 client = xmlrpclib.ServerProxy('http://pypi.python.org/pypi')
@@ -11,3 +12,11 @@ for name in package_names:
     home_page = release_data['home_page']
     author = release_data['author']
     summary = release_data['summary']
+    distribution = Distribution()
+    distribution.name = name
+    distribution.home_page = home_page
+    distribution.author = author
+    distribution.summary = summary
+    db.session.add(distribution)
+
+db.session.commit()
