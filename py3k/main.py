@@ -24,7 +24,7 @@
 # authors and should not be interpreted as representing official policies, either expressed
 # or implied, of Baiju M <baiju.m.mail@gmail.com>.
 
-from flask import render_template
+from flask import render_template, request
 
 import application
 app = application.app

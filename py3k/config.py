@@ -27,10 +27,12 @@
 class Config(object):
     DEBUG = False
     TESTING = False
-    SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/test.db'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:////var/tmp/getpython3.db'
+    OPENID_FS_STORE_PATH = '/var/tmp/getpython3openid'
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'mysql://user:passwd@localhost/db'
+    #SQLALCHEMY_DATABASE_URI = 'mysql://user:passwd@localhost/db'
+    pass
 
 class DevelopmentConfig(Config):
     DEBUG = True
