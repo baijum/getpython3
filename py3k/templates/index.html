@@ -1,1 +1,31 @@
 {% extends "layout.html" %}
+{% block body %}
+
+<h2><a href="#">Python 3: The current edition</a></h2>
+
+<div style="float: right; padding: 30px 10px 10px 10px;">
+  <img width="100%" src="{{ url_for('.static', filename='hello.png') }}" alt="image" />
+</div>
+
+<p>Python 3 is the latest shiny version of Python programming language.</p>
+
+<p></p>
+
+<p></p>
+
+<h2>Why upgrade to Python 3 ?</h2>
+
+<div style="float: left; padding: 0 10px 0 0;">
+  <img src="{{ url_for('.static', filename='image1.png') }}" alt="image" />
+</div>
+
+<p>Python 3 is a simple language compared to Python 2.  The
+  process of upgradation is very
+  well <a href="http://wiki.python.org/moin/PortingPythonToPy3k">documented.</a>
+</p>
+
+<p>
+
+</p>
+
+{% endblock %}
