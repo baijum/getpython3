@@ -7,9 +7,9 @@ class Distribution(db.Model):
     __tablename__ = 'distribution'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=True)
-    url = db.Column(db.String(50), unique=True)
-    authors = db.Column(db.String(50), unique=True)
-    summary = db.Column(db.String(50), unique=True)
+    home_page = db.Column(db.String(50))
+    author = db.Column(db.String(50))
+    summary = db.Column(db.String(50))
 
     
 class User(db.Model):
@@ -47,4 +47,3 @@ class Comments(db.Model):
     user_id = db.Column("user_id", db.Integer, db.ForeignKey('users.id'))
     comment = db.Column(db.String(5000))
     status = db.Column(db.Boolean()) #True=Working,False=FAILING
-
