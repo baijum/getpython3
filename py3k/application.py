@@ -37,4 +37,5 @@ oid = OpenID(app, app.config['OPENID_FS_STORE_PATH'])
 
 import model
 import auth
+import packages
 import main

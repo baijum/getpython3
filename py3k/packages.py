@@ -24,11 +24,20 @@
 # authors and should not be interpreted as representing official policies, either expressed
 # or implied, of Baiju M <baiju.m.mail@gmail.com>.
 
-from flask import render_template
+from flask import render_template, request, redirect, url_for
+from .model import Distribution
 
 import application
 app = application.app
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+@app.route('/package/+<int:page_number>')
+def packages_browse_page(page_number):
+    result = Distribution.query.all()
+    return render_template('show_package.html', result=result)
+
+@app.route('/package', methods=['GET', 'POST'])
+def packages():
+    if request.method == 'POST':
+        return render_template('packages.html')
+    else:
+        return redirect(url_for('packages_browse_page', page_number=1))
