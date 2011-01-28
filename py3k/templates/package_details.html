@@ -8,76 +8,64 @@
 
 <p></p>
 
-<h2>Python 3: The current edition</h2>
-
-<div style="float: right; padding: 30px 10px 10px 10px;">
-  <img width="100%" src="{{ url_for('.static', filename='hello.png') }}" alt="image" />
-</div>
-
-<p>Python 3 is the latest shiny version of Python programming language.</p>
-
-<p></p>
-
-<p></p>
-
-<h2>Why upgrade to Python 3 ?</h2>
-
-<div style="float: left; padding: 0 10px 0 0;">
-  <img src="{{ url_for('.static', filename='image1.png') }}" alt="image" />
-</div>
-
-<p>Python 3 is a simple language compared to Python 2.  The
-  process of upgradation is very
-  well <a href="http://wiki.python.org/moin/PortingPythonToPy3k">documented.</a>
-</p>
-
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
 
 <h2>Package Distribution Compatibility for Python 3</h2>
 
 <div>
 
-  <form action="package" method=post>
+  <form action="{{ url_for('packages') }}" method=post>
     Search Package Distribution: <input type=text name=pkgname size=30 />
     <input type=submit value="Search" />
   </form>
 
-  <a href="packages">Browse All</a>
+  <a href="{{ url_for('packages') }}">Browse All</a>
 
-  {{ result.name }}
-  {{ result.home_page }}
-  {{ result.author }}
-  {{ result.summary }}
+  <h2><a href="http://pypi.python.org/pypi/{{ result.name }}">{{ result.name }}</a></h2>
 
+  <dl>
+    <dt>Home Page</dt>
+    <dd><a href="{{ result.home_page }}">{{ result.home_page }}</a></dd>
+    <dt>Author(s)</dt>
+    <dd>{{ result.author }}</dd>
+    <dt>Summary</dt>
+    <dd>{{ result.summary }}</dd>
+  </dl>
+
+  <h3>Comments</h3>
+  <p>User name</p>
+  <p>Comment</p>
+
+  <h3>Add your comment</h3>
+  <form>
+    <p>
+      Works for me 
+      <input checked="checked" id="comment_works_for_me_true" name="comment[works_for_me]" type="radio" value="true">
+      Yes
+      <input id="comment_works_for_me_false" name="comment[works_for_me]" type="radio" value="false">
+      No
+    </p>
+    <p>
+      Machine platform
+      <select id="comment_machine_platform_id" name="comment[machine_platform_id]">
+        <option value="16">GNU/Linux</option>
+        <option value="17">Windows</option>
+        <option value="15">Mac OSX</option>
+        <option value="18">FreeBSD</option>
+        <option value="18">OpenBSD</option>
+        <option value="18">NetBSD</option>
+        <option value="18">Solaris</option>
+        <option value="19">Other</option>
+      </select>
+    </p>
+    Comments (optional) <br/>
+    <textarea cols="60" id="comment_body" name="comment[body]" rows="6"></textarea>
+    <input type=submit value="Submit" />
+  </form>
+  
 </div>
 
-Latest Feedback
-Popular Package Distributions (most comments)
-
-Get involved!
-
-The Python community needs your help.  Install Python 3.2 then try out your
-favourite Package and provide feedback here.
-
-We can then track the general "supported-ness" of Package distributions in
-Python 3.
-
-Let us know your thoughts!
-
-Visit <a href="https://groups.google.com/forum/?msg=new&lnk=gcis&hl=en#!forum/getpython3">our
-forum</a> to report any bugs or pass on your suggestions.
-
-Don't know where to start?
-
-Try one of these...
 
 <p>
-
 </p>
 
 {% endblock %}
