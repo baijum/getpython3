@@ -35,9 +35,14 @@ def packages_browse_page(page_number):
     result = Distribution.query.all()
     return render_template('show_package.html', result=result)
 
+@app.route('/package/<name>')
+def packages_details(name):
+    result = Distribution.query.filter_by(name=name).first()
+    return render_template('package_details.html', result=result)
+
 @app.route('/package', methods=['GET', 'POST'])
 def packages():
     if request.method == 'POST':
-        return render_template('packages.html')
+        return redirect(url_for('packages_details', name=request.form['pkgname']))
     else:
         return redirect(url_for('packages_browse_page', page_number=1))
