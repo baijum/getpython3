@@ -48,9 +48,27 @@
   </form>
   <a href="packages">Browse All</a>
 
+    <table id="myTable">
+     <tbody>
+
   {% for item in result %}
-  {{ item.name }}
+  <tr><td>{{ item.name }}</td></tr>
+  
   {% endfor %}
+     <tbody>
+    </table>
+    <div class='pager'>
+        <a href='#' alt='Previous' class='prevPage'>Prev</a>
+        <span class='currentPage'></span> of <span class='totalPages'></span>
+        <a href='#' alt='Next' class='nextPage'>Next</a>
+    </div>
+    
+    <script>
+    
+    $(document).ready(function () {
+        $('#myTable').paginateTable({ rowsPerPage: 2 });
+    });
+    </script>
 
 </div>
 

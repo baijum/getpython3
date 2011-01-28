@@ -4,7 +4,26 @@ import xmlrpclib
 client = xmlrpclib.ServerProxy('http://pypi.python.org/pypi')
 
 # XXX: Remove these hard-coding later
-package_names = ['zope.interface', 'Twisted']
+package_names = ['zope.interface',
+                 'Twisted',
+                 'treedict',
+                 'sqlite3dbm',
+                 'splinter',
+                 'slacklog',
+                 'etm',
+                 'lcnester',
+                 'askbot',
+                 'runFBTests',
+                 'selenium-saucelabs-python',
+                 'translitcodec',
+                 'etsy',
+                 'm2wsgi',
+                 'pybedtools',
+                 'Cobaya',
+                 'podcaster',
+                 'isotoma.recipe.cluster',
+                 'mcweb',
+                 'isotoma.zope.testpythonscript',]
 #package_names = client.list_packages()
 
 for name in package_names:
