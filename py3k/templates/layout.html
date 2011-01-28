@@ -2,10 +2,15 @@
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" type="text/css" href="{{ url_for('.static', filename='css/style.css') }}" />
+    <meta charset="utf-8">
     {% block title %}<title>Get Python 3</title>{% endblock %}
-    <script src="{{ url_for('.static', filename='js/jquery-1.4.4.min.js') }}"></script> 
-    <script src="{{ url_for('.static', filename='js/paginatetable.js') }}"></script> 
+    <link rel="stylesheet" type="text/css" href="{{ url_for('.static', filename='css/style.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('.static', filename='css/jquery-ui-base-1.8.9.css') }}" />
+    <script src="{{ url_for('.static', filename='js/jquery-1.4.4.min.js') }}"></script>
+    <script src="{{ url_for('.static', filename='js/jquery-ui-1.8.9.min.js') }}"></script>
+    <script src="{{ url_for('.static', filename='js/paginatetable.js') }}"></script>
+    {% block script %}{% endblock %}
+
   </head>
   <body>
 

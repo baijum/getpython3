@@ -1,4 +1,12 @@
 {% extends "layout.html" %}
+{% block script %}
+<script>
+  $(function() {
+    $( "#tabs" ).tabs();
+  });
+</script>
+{% endblock %}
+
 {% block body %}
 
 <strong>This site is under development. 
@@ -17,6 +25,7 @@
 <p>Python 3 is the latest shiny version of Python programming language.</p>
 
 <p></p>
+
 
 <p></p>
 
@@ -50,29 +59,45 @@
 
 </div>
 
-Latest Feedback
-Popular Package Distributions (most comments)
-
-Get involved!
-
-The Python community needs your help.  Install Python 3.2 then try out your
-favourite Package and provide feedback here.
-
-We can then track the general "supported-ness" of Package distributions in
-Python 3.
-
-Let us know your thoughts!
-
-Visit <a href="https://groups.google.com/forum/?msg=new&lnk=gcis&hl=en#!forum/getpython3">our
-forum</a> to report any bugs or pass on your suggestions.
-
-Don't know where to start?
-
-Try one of these...
 
 
 <p>
 
 </p>
+
+
+
+<div id="tabs">
+  <ul>
+	<li><a href="#tabs-1">Latest Feedback</a></li>
+	<li><a href="#tabs-2">Popular Distros</a></li>
+	<li><a href="#tabs-3">Get Involved!</a></li>
+  </ul>
+  <div id="tabs-1">
+	<p></p>
+  </div>
+  <div id="tabs-2">
+	<p></p>
+  </div>
+  <div id="tabs-3">
+	<p>
+      The Python community needs your help.  Install Python 3.2 then try out
+      your favourite Package and provide feedback here.
+
+      We can then track the general "supported-ness" of Package distributions in
+      Python 3.
+
+      Let us know your thoughts!
+
+      Visit <a href="https://groups.google.com/forum/?msg=new&lnk=gcis&hl=en#!forum/getpython3">our
+        forum</a> to report any bugs or pass on your suggestions.
+
+      Don't know where to start?
+      
+      Try one of these...
+    </p>
+  </div>
+</div>
+
 
 {% endblock %}
