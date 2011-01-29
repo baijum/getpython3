@@ -36,7 +36,13 @@
   <p>Comment</p>
 
   <h3>Add your comment</h3>
-  <form>
+  <form action="{{ url_for('packages_details', name=result.name) }}/add_comment" method=post>
+    Name 
+    <input type=text name=fullname size=30 /> <br />
+
+    Email 
+    <input type=text name=email size=30 /> <br />
+
     <p>
       Works for me 
       <input checked="checked" id="comment_works_for_me_true" name="comment[works_for_me]" type="radio" value="true">

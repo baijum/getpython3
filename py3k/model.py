@@ -58,5 +58,8 @@ class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     distribution_id = db.Column("distribution_id", db.Integer, db.ForeignKey('distributions.id'))
     user_id = db.Column("user_id", db.Integer, db.ForeignKey('users.id'))
+    fullname = db.Column(db.String(50))
+    email = db.Column(db.String(120))
+    working = db.Column(db.Boolean()) #True=Working,False=FAILING
+    platform = db.Column(db.String(50))
     comment = db.Column(db.String(5000))
-    status = db.Column(db.Boolean()) #True=Working,False=FAILING

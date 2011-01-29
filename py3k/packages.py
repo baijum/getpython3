@@ -25,20 +25,44 @@
 # or implied, of Baiju M <baiju.m.mail@gmail.com>.
 
 from flask import render_template, request, redirect, url_for
+#from flask import session
 from .model import Distribution
+#from .model import User
+from .model import Comment
 
-import application
-app = application.app
+from .application import app
+from .application import db
 
 @app.route('/package/+<int:page_number>')
 def packages_browse_page(page_number):
     result = Distribution.query.all()
     return render_template('show_package.html', result=result)
 
+@app.route('/package/<name>/add_comment', methods=['POST'])
+def add_comment(name):
+    fullname = request.form['fullname']
+    email = request.form['email']
+    working = request.form['comment[works_for_me]']
+    platform = request.form['comment[machine_platform_id]']
+    comment = request.form['comment[body]']
+    new_comment = Comment()
+    result = Distribution.query.filter_by(name=name).first()
+    new_comment.distribution_id = result.id
+    new_comment.fullname = fullname
+    new_comment.email = email
+    new_comment.working = True if working == 'true' else False
+    new_comment.platform = platform
+    new_comment.comment = comment
+    db.session.add(new_comment)
+    db.session.commit()
+    return redirect(url_for('packages_details', name=name))
+
+
 @app.route('/package/<name>')
 def packages_details(name):
     result = Distribution.query.filter_by(name=name).first()
     return render_template('package_details.html', result=result)
+
 
 @app.route('/package', methods=['GET', 'POST'])
 def packages():
