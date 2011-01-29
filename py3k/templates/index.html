@@ -74,9 +74,9 @@
 	<li><a href="#tabs-3">Get Involved!</a></li>
   </ul>
   <div id="tabs-1">
-    {% for comment in comments %}
+    {% for comment,distribution in comments %}
     <p>
-      {{ comment.distribution_id }} ({{ comment.version }}) is
+      <a href="{{ url_for('packages_details', name=distribution.name) }}">{{ distribution.name }}</a> ({{ comment.version }}) is
       <span class="{{ get_status(comment.working)[0] }}">{{ get_status(comment.working)[1] }}</span>
       for {{ comment.fullname }} ({{ comment.platform }}, {{ time_delta(comment.datetime) }} ) <br/>
     </p>
