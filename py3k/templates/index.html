@@ -84,29 +84,35 @@
 
   </div>
   <div id="tabs-2">
-	<p></p>
+    <p></p>
   </div>
   <div id="tabs-3">
 	<p>
-      The Python community needs your help.  Install Python 3.2 then try out
-      your favourite Package and provide feedback here.
+      The Python community needs your
+      help.  <a href="http://python.org/download/releases/3.2/#download">Install
+      Python 3.2</a> then try out your favourite Package and provide
+      feedback here.
     <p>
     <p>
       We can then track the general "supported-ness" of Package distributions in
       Python 3.
     </p>
-    <p>
-      Let us know your thoughts!
-    </p>
+
+    <h4>Let us know your thoughts!</h4>
+
     <p>
       Visit <a href="https://groups.google.com/forum/?msg=new&lnk=gcis&hl=en#!forum/getpython3">
         our forum</a> to report any bugs or pass on your suggestions.
     </p>
-    <p>
-      Don't know where to start?
-    </p>
+
+    <h4>Don't know where to start?</h4>
+
     <p>
       Try one of these...
+      {% for distribution in no_comments_packages %}
+      <a href="{{ url_for('packages_details', name=distribution.name) }}">{{ distribution.name }}</a> <br/>
+      {% endfor %}
+
     </p>
   </div>
 </div>

@@ -37,10 +37,10 @@ from .utils import get_status, pretty_date
 
 @app.route('/')
 def index():
-
-    comments = db.session.query(Comment, Distribution).join(Distribution).order_by(db.desc(Comment.datetime)).limit(5)
-    
+    comments = db.session.query(Comment, Distribution).outerjoin(Distribution).order_by(db.desc(Comment.datetime)).limit(5)
+    no_comments_packages = db.session.query(Distribution).outerjoin(Comment).filter(Comment.distribution_id==None).limit(5)
     return render_template('index.html',
                            comments=comments,
+                           no_comments_packages=no_comments_packages,
                            get_status=get_status,
                            time_delta=pretty_date)
