@@ -26,9 +26,20 @@
 
 from flask import render_template
 
-import application
-app = application.app
+from .application import app
+from .application import db
+
+#from .model import Distribution
+#from .model import User
+from .model import Comment
+from .utils import get_status, pretty_date
+
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    #result = Distribution.query.filter_by(name=name).first()
+    comments = Comment.query.order_by(db.desc(Comment.datetime)).limit(5)
+    return render_template('index.html',
+                           comments=comments,
+                           get_status=get_status,
+                           time_delta=pretty_date)

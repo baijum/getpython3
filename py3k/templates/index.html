@@ -74,7 +74,14 @@
 	<li><a href="#tabs-3">Get Involved!</a></li>
   </ul>
   <div id="tabs-1">
-	<p></p>
+    {% for comment in comments %}
+    <p>
+      {{ comment.distribution_id }} ({{ comment.version }}) is
+      <span class="{{ get_status(comment.working)[0] }}">{{ get_status(comment.working)[1] }}</span>
+      for {{ comment.fullname }} ({{ comment.platform }}, {{ time_delta(comment.datetime) }} ) <br/>
+    </p>
+  {% endfor %}
+
   </div>
   <div id="tabs-2">
 	<p></p>
