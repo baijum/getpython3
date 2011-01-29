@@ -61,5 +61,7 @@ class Comment(db.Model):
     fullname = db.Column(db.String(50))
     email = db.Column(db.String(120))
     working = db.Column(db.Boolean()) #True=Working,False=FAILING
+    version = db.Column(db.String(20))
     platform = db.Column(db.String(50))
     comment = db.Column(db.String(5000))
+    datetime = db.Column(db.DateTime())

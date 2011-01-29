@@ -35,8 +35,12 @@
 
   {% for comment in comments %}
   <p>
-    Username: {{ comment.fullname }} <br />
-    Comment: {{ comment.comment }} <br />
+    {{ result.name }} ({{ comment.version }}) is
+    <span class="{{ get_status(comment.working)[0] }}">{{ get_status(comment.working)[1] }}</span>
+    for {{ comment.fullname }} ({{ comment.platform }}, {{ time_delta(comment.datetime) }} ) <br/>
+    <pre>
+{{ comment.comment }}
+    </pre>
   </p>
   {% endfor %}
 
@@ -51,24 +55,26 @@
 
     <p>
       Works for me 
-      <input checked="checked" id="comment_works_for_me_true" name="comment[works_for_me]" type="radio" value="true">
+      <input checked="checked" id="working" name="working" type="radio" value="true">
       Yes
-      <input id="comment_works_for_me_false" name="comment[works_for_me]" type="radio" value="false">
+      <input id="working" name="working" type="radio" value="false">
       No
     </p>
     <p>
-      Machine platform
-      <select id="comment_machine_platform_id" name="comment[machine_platform_id]">
-        <option value="16">GNU/Linux</option>
-        <option value="17">Windows</option>
-        <option value="15">Mac OSX</option>
-        <option value="18">FreeBSD</option>
-        <option value="18">OpenBSD</option>
-        <option value="18">NetBSD</option>
-        <option value="18">Solaris</option>
-        <option value="19">Other</option>
+      Platform
+      <select id="platform" name="platform">
+        <option value="GNU/Linux">GNU/Linux</option>
+        <option value="Windows">Windows</option>
+        <option value="Mac OSX">Mac OSX</option>
+        <option value="FreeBSD">FreeBSD</option>
+        <option value="OpenBSD">OpenBSD</option>
+        <option value="NetBSD">NetBSD</option>
+        <option value="Solaris">Solaris</option>
+        <option value="Other">Other</option>
       </select>
     </p>
+    Version 
+    <input type=text name=version size=30 /> <br />
     Comments (optional) <br/>
     <textarea cols="60" id="comment_body" name="comment[body]" rows="6"></textarea>
     <input type=submit value="Submit" />
