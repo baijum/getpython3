@@ -32,8 +32,14 @@
   </dl>
 
   <h3>Comments</h3>
-  <p>User name</p>
-  <p>Comment</p>
+
+  {% for comment in comments %}
+  <p>
+    Username: {{ comment.fullname }} <br />
+    Comment: {{ comment.comment }} <br />
+  </p>
+  {% endfor %}
+
 
   <h3>Add your comment</h3>
   <form action="{{ url_for('packages_details', name=result.name) }}/add_comment" method=post>

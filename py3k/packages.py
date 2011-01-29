@@ -61,7 +61,8 @@ def add_comment(name):
 @app.route('/package/<name>')
 def packages_details(name):
     result = Distribution.query.filter_by(name=name).first()
-    return render_template('package_details.html', result=result)
+    comments = Comment.query.filter_by(distribution_id=result.id)
+    return render_template('package_details.html', result=result, comments=comments)
 
 
 @app.route('/package', methods=['GET', 'POST'])
