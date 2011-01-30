@@ -27,6 +27,7 @@
 from flask import Flask
 from flaskext.sqlalchemy import SQLAlchemy
 from flaskext.openid import OpenID
+from flaskext.gravatar import Gravatar
 
 app = Flask(__name__)
 
@@ -35,6 +36,12 @@ app.config.from_object('py3k.config.DevelopmentConfig')
 db = SQLAlchemy(app)
 oid = OpenID(app, app.config['OPENID_FS_STORE_PATH'])
 
+gravatar = Gravatar(app,
+                    size=20,
+                    rating='g',
+                    default='retro',
+                    force_default=False,
+                    force_lower=False)
 import model
 import auth
 import packages
