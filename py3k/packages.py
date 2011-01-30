@@ -62,7 +62,7 @@ def add_comment(name):
 @app.route('/package/<name>')
 def packages_details(name):
     result = Distribution.query.filter_by(name=name).first()
-    comments = Comment.query.filter_by(distribution_id=result.id)
+    comments = Comment.query.filter_by(distribution_id=result.id).order_by(db.desc(Comment.datetime))
 
     return render_template('package_details.html',
                            result=result,
