@@ -27,7 +27,11 @@ package_names = ['zope.interface',
 #package_names = client.list_packages()
 
 for name in package_names:
-    release_data = client.release_data(name, client.package_releases(name)[0])
+    try:
+        release_data = client.release_data(name, client.package_releases(name)[0])
+    except IndexError:
+        print name
+        continue
     home_page = release_data['home_page']
     author = release_data['author']
     summary = release_data['summary']
