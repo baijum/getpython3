@@ -6,7 +6,7 @@ client = xmlrpclib.ServerProxy('http://pypi.python.org/pypi')
 
 package_names = client.list_packages()
 result = db.session.query(Distribution).all()
-existing_package_names = set([str(p.name) for p in result])
+existing_package_names = set([p.name for p in result])
 package_names = set(package_names)
 diff_package_names = existing_package_names ^ package_names
 
