@@ -1,26 +1,31 @@
 {% extends "layout.html" %}
 {% block body %}
 
-<strong>This site is under development. 
-<a href="https://groups.google.com/forum/?msg=new&lnk=gcis&hl=en#!forum/getpython3">Discussion</a>.
-<a href="https://github.com/baijum/getpython3">Code</a>
-</strong>
 
-<h2>Package Distribution Compatibility for Python 3</h2>
+<h2>Want to use Python 3 for your next project ?</h2>
+
+<h4 style="color: #243F00">Find out all the third party libraries supported by Python 3!  You can
+also submit feedback about compatibility with Python 3.</h4>
 
 <div>
 
   <form action="{{ url_for('packages') }}" method=post>
-    Search Package Distribution: <input type=text name=pkgname size=30 />
-    <input type=submit value="Search" />
+    <input onfocus="if(this.value == 'Search Distros') {this.value = ''}" style="opacity:0.4;font-size: 15pt" type=text name=pkgname size=20 value="Search Distros" />
+    <input style="font-size: 18pt" type=submit value="Search" />
+    <a style="text-decoration: underline" href="{{ url_for('packages') }}">Browse All</a>
   </form>
-  <a href="{{ url_for('packages') }}">Browse All</a>
+
+</div>
+
+<p></p> 
 
   <table id="myTable">
     <tbody>
 
       {% for item in result %}
-      <tr><td><a href="{{ url_for('packages_details', name=item.name) }}">{{ item.name }}</a></td></tr>
+      <tr><td><a href="{{ url_for('packages_details', name=item.name) }}">{{ item.name }}</a></td>
+        <td> {{ item.summary }} </td>
+      </tr>
   
       {% endfor %}
     <tbody>
