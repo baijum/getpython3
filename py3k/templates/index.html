@@ -25,9 +25,7 @@ also submit feedback about compatibility with Python 3.</h4>
 
 </div>
 
-<p>
-
-</p>
+<p></p>
 
 <div id="tabs">
   <ul>
@@ -51,8 +49,8 @@ also submit feedback about compatibility with Python 3.</h4>
   <div id="tabs-3">
 	<p>
       The Python community needs your
-      help.  <a href="http://python.org/download/releases/3.2/#download">Install
-      Python 3.2</a> then try out your favourite Package and provide
+      help.  <a href="http://python.org/download/releases/3.2/#download">
+      Install Python 3.2</a> then try out your favourite Package and provide
       feedback here.
     <p>
     <p>
@@ -70,11 +68,10 @@ also submit feedback about compatibility with Python 3.</h4>
     <h4>Don't know where to start?</h4>
 
     <p>
-      Try one of these...
+      Try one of these... <br /><br />
       {% for distribution in no_comments_packages %}
       <a href="{{ url_for('packages_details', name=distribution.name) }}">{{ distribution.name }}</a> <br/>
       {% endfor %}
-
     </p>
   </div>
 </div>
