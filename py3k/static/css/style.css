@@ -106,3 +106,7 @@ padding: 0 0 10px 0;
 #footer p { padding: 0; margin: 0; }
 #footer a { color: #979797; }
 #footer a:hover { text-decoration: underline; }
+
+tr.odd {
+   background: #f1ffdf;
+}

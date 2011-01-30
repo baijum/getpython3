@@ -12,8 +12,8 @@ also submit feedback about compatibility with Python 3.</h4>
   <form action="{{ url_for('packages') }}" method=post>
     <input onfocus="if(this.value == 'Search Distros') {this.value = ''}" style="opacity:0.4;font-size: 15pt" type=text name=pkgname size=20 value="Search Distros" />
     <input style="font-size: 18pt" type=submit value="Search" />
+    <a style="text-decoration: underline" href="{{ url_for('packages') }}">Browse All</a>
   </form>
-  <a style="text-decoration: underline" href="{{ url_for('packages') }}">Browse All</a>
 
 </div>
 
@@ -21,9 +21,12 @@ also submit feedback about compatibility with Python 3.</h4>
 
 <table id="myTable">
   <tbody>
-
-    {% for item in result %}
     <tr>
+      <th>Distribution</th>
+      <th>Description</th>
+    </tr>
+    {% for item in result %}
+    <tr class="{{ loop.cycle('odd', 'even') }}">
       <td><a href="{{ url_for('packages_details', name=item.name) }}">{{ item.name }}</a></td>
       <td> {{ item.summary }} </td>
     </tr>
