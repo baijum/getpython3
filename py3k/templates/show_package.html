@@ -17,7 +17,28 @@ also submit feedback about compatibility with Python 3.</h4>
 
 </div>
 
-<p></p> 
+<p></p>
+{% macro render_pagination(pagination, endpoint) %}
+  <div class=pagination style="font-size: 14pt;text-align:center">
+  {%- for page in pagination.iter_pages() %}
+    {% if page %}
+      {% if page != pagination.page %}
+        <a href="{{ url_for(endpoint, page=page) }}">{{ page }}</a>
+      {% else %}
+        <strong>{{ page }}</strong>
+      {% endif %}
+    {% else %}
+      <span class=ellipsis>...</span>
+    {% endif %}
+      
+  {%- endfor %}
+
+  </div>
+{% endmacro %}
+
+
+{{ render_pagination(page_obj, 'packages') }}
+
 
 <table id="myTable">
   <thead>
@@ -27,27 +48,17 @@ also submit feedback about compatibility with Python 3.</h4>
     </tr>
   </thead>
   <tbody>
-    {% for item in result %}
+    {%- for item in page_obj.items %}
     <tr class="{{ loop.cycle('odd', 'even') }}">
       <td><a href="{{ url_for('packages_details', name=item.name) }}">{{ item.name }}</a></td>
       <td> {{ item.summary }} </td>
     </tr>
   
-    {% endfor %}
+    {%- endfor %}
   <tbody>
 </table>
-<div class='pager'>
-  <a href='#' alt='Previous' class='prevPage'>Prev</a>
-  <span class='currentPage'></span> of <span class='totalPages'></span>
-  <a href='#' alt='Next' class='nextPage'>Next</a>
-</div>
-    
-<script>
-  $(document).ready(function () {
-  $('#myTable').paginateTable({ rowsPerPage: 15 });
-  });
-</script>
 
-<p></p>
+
+{{ render_pagination(page_obj, 'packages') }}
 
 {% endblock %}

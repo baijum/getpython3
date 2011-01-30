@@ -75,9 +75,10 @@ def packages_details(name):
 
 
 @app.route('/package', methods=['GET', 'POST'])
-def packages():
+@app.route('/package/+<int:page>')
+def packages(page=1):
     if request.method == 'POST':
         return redirect(url_for('packages_details', name=request.form['pkgname']))
     else:
-        result = Distribution.query.all()
-        return render_template('show_package.html', result=result)
+        result = Distribution.query.paginate(page)
+        return render_template('show_package.html', page_obj=result)
