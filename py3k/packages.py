@@ -35,10 +35,6 @@ from .application import app
 from .application import db
 from .utils import get_status, pretty_date
 
-@app.route('/package/+<int:page_number>')
-def packages_browse_page(page_number):
-    result = Distribution.query.all()
-    return render_template('show_package.html', result=result)
 
 @app.route('/package/<name>/add_comment', methods=['POST'])
 def add_comment(name):
@@ -80,4 +76,5 @@ def packages():
     if request.method == 'POST':
         return redirect(url_for('packages_details', name=request.form['pkgname']))
     else:
-        return redirect(url_for('packages_browse_page', page_number=1))
+        result = Distribution.query.all()
+        return render_template('show_package.html', result=result)
