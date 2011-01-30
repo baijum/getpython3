@@ -60,3 +60,7 @@ def index():
                            no_comments_packages=no_comments_packages,
                            get_status=get_status,
                            time_delta=pretty_date)
+
+@app.route('/credits')
+def credits():
+    return render_template('credits.html')
