@@ -12,41 +12,37 @@ also submit feedback about compatibility with Python 3.</h4>
   <form action="{{ url_for('packages') }}" method=post>
     <input onfocus="if(this.value == 'Search Distros') {this.value = ''}" style="opacity:0.4;font-size: 15pt" type=text name=pkgname size=20 value="Search Distros" />
     <input style="font-size: 18pt" type=submit value="Search" />
-    <a style="text-decoration: underline" href="{{ url_for('packages') }}">Browse All</a>
   </form>
+  <a style="text-decoration: underline" href="{{ url_for('packages') }}">Browse All</a>
 
 </div>
 
 <p></p> 
 
-  <table id="myTable">
-    <tbody>
+<table id="myTable">
+  <tbody>
 
-      {% for item in result %}
-      <tr><td><a href="{{ url_for('packages_details', name=item.name) }}">{{ item.name }}</a></td>
-        <td> {{ item.summary }} </td>
-      </tr>
+    {% for item in result %}
+    <tr>
+      <td><a href="{{ url_for('packages_details', name=item.name) }}">{{ item.name }}</a></td>
+      <td> {{ item.summary }} </td>
+    </tr>
   
-      {% endfor %}
-    <tbody>
-  </table>
-  <div class='pager'>
-    <a href='#' alt='Previous' class='prevPage'>Prev</a>
-    <span class='currentPage'></span> of <span class='totalPages'></span>
-    <a href='#' alt='Next' class='nextPage'>Next</a>
-  </div>
-    
-  <script>
-    
-    $(document).ready(function () {
-      $('#myTable').paginateTable({ rowsPerPage: 10 });
-    });
-  </script>
-
+    {% endfor %}
+  <tbody>
+</table>
+<div class='pager'>
+  <a href='#' alt='Previous' class='prevPage'>Prev</a>
+  <span class='currentPage'></span> of <span class='totalPages'></span>
+  <a href='#' alt='Next' class='nextPage'>Next</a>
 </div>
+    
+<script>
+  $(document).ready(function () {
+  $('#myTable').paginateTable({ rowsPerPage: 10 });
+  });
+</script>
 
-<p>
-
-</p>
+<p></p>
 
 {% endblock %}

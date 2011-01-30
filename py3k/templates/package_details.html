@@ -19,66 +19,63 @@ also submit feedback about compatibility with Python 3.</h4>
 </p>
 <h2><a href="http://pypi.python.org/pypi/{{ result.name }}">{{ result.name }}</a></h2>
 
-  <dl>
-    <dt>Home Page</dt>
-    <dd><a href="{{ result.home_page }}">{{ result.home_page }}</a></dd>
-    <dt>Author(s)</dt>
-    <dd>{{ result.author }}</dd>
-    <dt>Summary</dt>
-    <dd>{{ result.summary }}</dd>
-  </dl>
+<dl>
+  <dt>Home Page</dt>
+  <dd><a href="{{ result.home_page }}">{{ result.home_page }}</a></dd>
+  <dt>Author(s)</dt>
+  <dd>{{ result.author }}</dd>
+  <dt>Summary</dt>
+  <dd>{{ result.summary }}</dd>
+</dl>
 
-  <h3>Comments</h3>
+<h3>Comments</h3>
 
-  {% for comment in comments %}
-  <p>
-    <img src="{{comment.email | gravatar}}"/> {{ comment.fullname }}
-    has {{ result.name }} ({{ comment.version }})  <span class="{{ get_status(comment.working)[0] }}">{{ get_status(comment.working)[1] }}</span>
-    on  {{ comment.platform }} : {{ time_delta(comment.datetime) }} <br/>
-    <pre>
-{{ comment.comment }}
-    </pre>
-  </p>
-  {% endfor %}
+{% for comment in comments %}
+<p>
+  <img src="{{comment.email | gravatar}}"/> {{ comment.fullname }}
+  has {{ result.name }} ({{ comment.version }})  <span class="{{ get_status(comment.working)[0] }}">{{ get_status(comment.working)[1] }}</span>
+  on  {{ comment.platform }} : {{ time_delta(comment.datetime) }} <br/>
+  <pre>
+    {{ comment.comment }}
+  </pre>
+</p>
+{% endfor %}
 
 
-  <h3>Add your comment</h3>
-  <form action="{{ url_for('packages_details', name=result.name) }}/add_comment" method=post>
-    Name 
-    <input type=text name=fullname size=30 /> <br />
-
-    Email 
-    <input type=text name=email size=30 /> <br />
-
-    <p>
-      Works for me 
-      <input checked="checked" id="working" name="working" type="radio" value="true">
-      Yes
-      <input id="working" name="working" type="radio" value="false">
-      No
-    </p>
-    <p>
-      Platform
-      <select id="platform" name="platform">
-        <option value="GNU/Linux">GNU/Linux</option>
-        <option value="Windows">Windows</option>
-        <option value="Mac OSX">Mac OSX</option>
-        <option value="FreeBSD">FreeBSD</option>
-        <option value="OpenBSD">OpenBSD</option>
-        <option value="NetBSD">NetBSD</option>
-        <option value="Solaris">Solaris</option>
-        <option value="Other">Other</option>
-      </select>
-    </p>
-    Version 
-    <input type=text name=version size=30 /> <br />
-    Comments (optional) <br/>
-    <textarea cols="60" id="comment_body" name="comment[body]" rows="6"></textarea>
-    <input type=submit value="Submit" />
-  </form>
+<h3>Add your comment</h3>
+<form action="{{ url_for('packages_details', name=result.name) }}/add_comment" method=post>
+  Name 
+  <input type=text name=fullname size=30 /> <br />
   
-</div>
-
+  Email 
+  <input type=text name=email size=30 /> <br />
+  
+  <p>
+    Works for me 
+    <input checked="checked" id="working" name="working" type="radio" value="true">
+    Yes
+    <input id="working" name="working" type="radio" value="false">
+    No
+  </p>
+  <p>
+    Platform
+    <select id="platform" name="platform">
+      <option value="GNU/Linux">GNU/Linux</option>
+      <option value="Windows">Windows</option>
+      <option value="Mac OSX">Mac OSX</option>
+      <option value="FreeBSD">FreeBSD</option>
+      <option value="OpenBSD">OpenBSD</option>
+      <option value="NetBSD">NetBSD</option>
+      <option value="Solaris">Solaris</option>
+      <option value="Other">Other</option>
+    </select>
+  </p>
+  Version 
+  <input type=text name=version size=30 /> <br />
+  Comments (optional) <br/>
+  <textarea cols="60" id="comment_body" name="comment[body]" rows="6"></textarea>
+  <input type=submit value="Submit" />
+</form>
 
 <p>
 </p>
