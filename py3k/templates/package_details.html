@@ -32,9 +32,9 @@ also submit feedback about compatibility with Python 3.</h4>
 
   {% for comment in comments %}
   <p>
-    {{ result.name }} ({{ comment.version }}) is
-    <span class="{{ get_status(comment.working)[0] }}">{{ get_status(comment.working)[1] }}</span>
-    for {{ comment.fullname }} ({{ comment.platform }}, {{ time_delta(comment.datetime) }} ) <br/>
+    <img src="{{comment.email | gravatar}}"/> {{ comment.fullname }}
+    has {{ result.name }} ({{ comment.version }})  <span class="{{ get_status(comment.working)[0] }}">{{ get_status(comment.working)[1] }}</span>
+    on  {{ comment.platform }} : {{ time_delta(comment.datetime) }} <br/>
     <pre>
 {{ comment.comment }}
     </pre>

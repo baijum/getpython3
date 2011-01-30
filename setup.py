@@ -3,7 +3,7 @@ from setuptools import setup
 setup(
     name="Get Python 3 website",
     version="0.1",
-    description='Website for ',
+    description='Website for porting status of packages to Python 3',
     long_description=open('README').read(),
     license='Simplified BSD',
     author='Baiju M.',
@@ -11,7 +11,7 @@ setup(
     url='http://getpython3.net/',
     platforms=['linux', 'osx', 'win32'],
     py_modules=['py3k'],
-    install_requires = ['flask', 'sqlalchemy', 'flask-sqlalchemy', 'flask-openid'],
+    install_requires = ['flask', 'sqlalchemy', 'flask-sqlalchemy', 'flask-openid', 'flask-gravatar'],
     classifiers=[
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License'
