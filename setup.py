@@ -1,9 +1,9 @@
 from setuptools import setup
 
 setup(
-    name="Get Python 3 website",
+    name="getpython3",
     version="0.1",
-    description='Website for ',
+    description='Website for getpython3.net',
     long_description=open('README').read(),
     license='Simplified BSD',
     author='Baiju M.',
