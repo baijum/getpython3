@@ -1,32 +1,16 @@
 from py3k.application import db
 from py3k.model import Distribution
+from sqlalchemy.exc import IntegrityError
 import xmlrpclib
 client = xmlrpclib.ServerProxy('http://pypi.python.org/pypi')
 
-# XXX: Remove these hard-coding later
-package_names = ['zope.interface',
-                 'Twisted',
-                 'treedict',
-                 'sqlite3dbm',
-                 'splinter',
-                 'slacklog',
-                 'etm',
-                 'lcnester',
-                 'askbot',
-                 'runFBTests',
-                 'selenium-saucelabs-python',
-                 'translitcodec',
-                 'etsy',
-                 'm2wsgi',
-                 'pybedtools',
-                 'Cobaya',
-                 'podcaster',
-                 'isotoma.recipe.cluster',
-                 'mcweb',
-                 'isotoma.zope.testpythonscript',]
-#package_names = client.list_packages()
+package_names = client.list_packages()
+result = db.session.query(Distribution).all()
+existing_package_names = set([str(p.name) for p in result])
+package_names = set(package_names)
+diff_package_names = existing_package_names ^ package_names
 
-for name in package_names:
+for name in diff_package_names:
     try:
         release_data = client.release_data(name, client.package_releases(name)[0])
     except IndexError:
@@ -41,5 +25,8 @@ for name in package_names:
     distribution.author = author
     distribution.summary = summary
     db.session.add(distribution)
+    try:
+        db.session.commit()
+    except IntegrityError:
+        db.session.rollback()
 
-db.session.commit()
