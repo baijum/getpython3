@@ -20,11 +20,13 @@ also submit feedback about compatibility with Python 3.</h4>
 <p></p> 
 
 <table id="myTable">
-  <tbody>
+  <thead>
     <tr>
       <th>Distribution</th>
       <th>Description</th>
     </tr>
+  </thead>
+  <tbody>
     {% for item in result %}
     <tr class="{{ loop.cycle('odd', 'even') }}">
       <td><a href="{{ url_for('packages_details', name=item.name) }}">{{ item.name }}</a></td>
