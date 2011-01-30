@@ -9,68 +9,30 @@
 
 {% block body %}
 
-<strong>This site is under development. 
-<a href="https://groups.google.com/forum/?msg=new&lnk=gcis&hl=en#!forum/getpython3">Discussion</a>.
-<a href="https://github.com/baijum/getpython3">Code</a>
-</strong>
 
-<p></p>
+<h2>Want to use Python 3 for your next project ?</h2>
 
-<h2>Python 3: The current edition</h2>
-
-<div style="float: right; padding: 30px 10px 10px 10px;">
-  <img width="100%" src="{{ url_for('.static', filename='hello.png') }}" alt="image" />
-</div>
-
-<p>Python 3 is the latest shiny version of Python programming language.</p>
-
-<p></p>
-
-
-<p></p>
-
-<h2>Why upgrade to Python 3 ?</h2>
-
-<div style="float: left; padding: 0 10px 0 0;">
-  <img src="{{ url_for('.static', filename='image1.png') }}" alt="image" />
-</div>
-
-<p>Python 3 is a simple language compared to Python 2.  The
-  process of upgradation is very
-  well <a href="http://wiki.python.org/moin/PortingPythonToPy3k">documented.</a>
-</p>
-
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-
-<h2>Package Distribution Compatibility for Python 3</h2>
+<h4 style="color: #243F00">Find out all the third party libraries supported by Python 3!  You can
+also submit feedback about compatibility with Python 3.</h4>
 
 <div>
 
   <form action="{{ url_for('packages') }}" method=post>
-    Search Package Distribution: <input type=text name=pkgname size=30 />
-    <input type=submit value="Search" />
+    <input onfocus="if(this.value == 'Search Distros') {this.value = ''}" style="opacity:0.4;font-size: 15pt" type=text name=pkgname size=20 value="Search Distros" />
+    <input style="font-size: 18pt" type=submit value="Search" />
+    <a style="text-decoration: underline" href="{{ url_for('packages') }}">Browse All</a>
   </form>
-  <a href="{{ url_for('packages') }}">Browse All</a>
 
 </div>
-
-
 
 <p>
 
 </p>
 
-
-
 <div id="tabs">
   <ul>
 	<li><a href="#tabs-1">Latest Feedback</a></li>
-	<li><a href="#tabs-2">Popular Distros</a></li>
+	<!--li><a href="#tabs-2">Popular Distros</a></li-->
 	<li><a href="#tabs-3">Get Involved!</a></li>
   </ul>
   <div id="tabs-1">

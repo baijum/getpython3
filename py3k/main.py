@@ -37,14 +37,23 @@ from .utils import get_status, pretty_date
 
 @app.route('/')
 def index():
-
     comments = db.session.query(Comment, Distribution).outerjoin(Distribution).order_by(db.desc(Comment.datetime)).limit(5)
-    #select * from distributions inner join (select * from comments where
-    #comments.id in (select max(comments.id) as id from comments group by
-    #comments.distribution_id)) a on distributions.id = a.distribution_id
-    #order by a.datetime desc
+    # select * from distributions inner join (select * from comments where
+    # comments.id in (select max(comments.id) as id from comments group by
+    # comments.distribution_id)) a on distributions.id = a.distribution_id
+    # order by a.datetime desc
 
     no_comments_packages = db.session.query(Distribution).outerjoin(Comment).filter(Comment.distribution_id==None).limit(5)
+
+    # select name,successcnt,failcnt from distributions d
+    # inner join
+    # (
+    #     select  distribution_id,
+    #     sum(case when check=true then 1 else 0 end) as successcnt,
+    #     sum(case when chec=false then 1 else end ) as failcnt
+    #     from
+    #     comments where datetime between(currendate,currentdate-60)
+    #     group by distribution_id) a on a.distribution_id =d.distribution_idn
 
     return render_template('index.html',
                            comments=comments,
