@@ -37,7 +37,7 @@ from .utils import get_status, pretty_date
 
 @app.route('/')
 def index():
-    comments = db.session.query(Comment, Distribution).outerjoin(Distribution).order_by(db.desc(Comment.datetime)).limit(100)
+    comments = db.session.query(Comment, Distribution).outerjoin(Distribution).order_by(db.desc(Comment.datetime)).limit(500)
     package_names = []
     lst_comments = []
     idx = 0
