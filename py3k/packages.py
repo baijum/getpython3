@@ -58,34 +58,31 @@ def add_comment(name):
     db.session.commit()
     return redirect(url_for('packages_details', name=name))
 
+@app.route('/search/<name>/+<int:page>')
+def search_package(name, page=1):
+    result = Distribution.query.filter(Distribution.name.like("%%%s%%"%name)).paginate(page)
+    return render_template('search_package.html', page_obj=result, searchname=name)
 
 @app.route('/package/<name>')
-@app.route('/package/<name>/+<int:page>')
-def packages_details(name, page=0):
-    if page == 0:
-        result = Distribution.query.filter_by(name=name).first()
-        if result is None:
-            return redirect(url_for('packages_details',
-                                    name=name,
-                                    page=1))
-        comments = Comment.query.filter_by(distribution_id=result.id).order_by(db.desc(Comment.datetime))
+def packages_details(name):
+    result = Distribution.query.filter_by(name=name).first()
+    if result is None:
+        return redirect(url_for('search_package', name=name, page=1))
+    comments = Comment.query.filter_by(distribution_id=result.id).order_by(db.desc(Comment.datetime))
         
-        return render_template('package_details.html',
-                               result=result,
-                               comments=comments,
-                               get_status=get_status,
-                               time_delta=pretty_date)
+    return render_template('package_details.html',
+                           result=result,
+                           comments=comments,
+                           get_status=get_status,
+                           time_delta=pretty_date)
     
-    else:
-        result = Distribution.query.filter(Distribution.name.like("%%%s%%"%name)).paginate(page)
-        return render_template('search_package.html', page_obj=result)
 
 
 @app.route('/package', methods=['GET', 'POST'])
 @app.route('/package/+<int:page>')
 def packages(page=1):
     if request.method == 'POST':
-        return redirect(url_for('packages_details', name=request.form['pkgname']))
+        return redirect(url_for('search_package', name=request.form['pkgname'], page=1))
     else:
         result = Distribution.query.paginate(page)
         return render_template('show_package.html', page_obj=result)

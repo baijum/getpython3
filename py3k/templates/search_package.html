@@ -23,7 +23,7 @@ also submit feedback about compatibility with Python 3.</h4>
   {%- for page in pagination.iter_pages() %}
     {% if page %}
       {% if page != pagination.page %}
-        <a href="{{ url_for(endpoint, page=page) }}">{{ page }}</a>
+        <a href="{{ url_for(endpoint, name=searchname, page=page) }}">{{ page }}</a>
       {% else %}
         <strong>{{ page }}</strong>
       {% endif %}
@@ -37,7 +37,7 @@ also submit feedback about compatibility with Python 3.</h4>
 {% endmacro %}
 
 
-{{ render_pagination(page_obj, 'package_details') }}
+{{ render_pagination(page_obj, 'search_package') }}
 
 
 <table id="myTable">
@@ -59,6 +59,6 @@ also submit feedback about compatibility with Python 3.</h4>
 </table>
 
 
-{{ render_pagination(page_obj, 'package_details') }}
+{{ render_pagination(page_obj, 'search_package') }}
 
 {% endblock %}
