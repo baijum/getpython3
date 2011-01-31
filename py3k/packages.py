@@ -60,18 +60,25 @@ def add_comment(name):
 
 
 @app.route('/package/<name>')
-def packages_details(name):
-    result = Distribution.query.filter_by(name=name).first()
-    #FIXME: need an alert
-    if result is None:
-        return "Not exist: %s"%name
-    comments = Comment.query.filter_by(distribution_id=result.id).order_by(db.desc(Comment.datetime))
-
-    return render_template('package_details.html',
-                           result=result,
-                           comments=comments,
-                           get_status=get_status,
-                           time_delta=pretty_date)
+@app.route('/package/<name>/+<int:page>')
+def packages_details(name, page=0):
+    if page == 0:
+        result = Distribution.query.filter_by(name=name).first()
+        if result is None:
+            return redirect(url_for('packages_details',
+                                    name=name,
+                                    page=1))
+        comments = Comment.query.filter_by(distribution_id=result.id).order_by(db.desc(Comment.datetime))
+        
+        return render_template('package_details.html',
+                               result=result,
+                               comments=comments,
+                               get_status=get_status,
+                               time_delta=pretty_date)
+    
+    else:
+        result = Distribution.query.filter(Distribution.name.like("%%%s%%"%name)).paginate(page)
+        return render_template('search_package.html', page_obj=result)
 
 
 @app.route('/package', methods=['GET', 'POST'])
