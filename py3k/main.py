@@ -37,7 +37,16 @@ from .utils import get_status, pretty_date
 
 @app.route('/')
 def index():
-    comments = db.session.query(Comment, Distribution).outerjoin(Distribution).order_by(db.desc(Comment.datetime)).limit(5)
+    comments = db.session.query(Comment, Distribution).outerjoin(Distribution).order_by(db.desc(Comment.datetime)).limit(100)
+    package_names = []
+    lst_comments = []
+    idx = 0
+    for comment,distribution in comments:
+        if distribution.name not in package_names:
+            package_names.append(distribution.name)
+            lst_comments.append(idx)
+        idx += 1
+    # FIXME: The above hack should be fixed with this better query
     # select * from distributions inner join (select * from comments where
     # comments.id in (select max(comments.id) as id from comments group by
     # comments.distribution_id)) a on distributions.id = a.distribution_id
@@ -58,6 +67,7 @@ def index():
     return render_template('index.html',
                            comments=comments,
                            no_comments_packages=no_comments_packages,
+                           lst_comments=lst_comments,
                            get_status=get_status,
                            time_delta=pretty_date)
 
