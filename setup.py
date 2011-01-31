@@ -11,7 +11,12 @@ setup(
     url='http://getpython3.net/',
     platforms=['linux', 'osx', 'win32'],
     py_modules=['py3k'],
-    install_requires = ['flask', 'sqlalchemy', 'flask-sqlalchemy', 'flask-openid', 'flask-gravatar'],
+    install_requires = ['Flask',
+                        'SQLAlchemy',
+                        'Flask-SQLAlchemy',
+                        'Flask-OpenID',
+                        'Flask-Script',
+                        'Flask-Gravatar'],
     classifiers=[
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License'
