@@ -36,7 +36,7 @@ also submit feedback about its compatibility with Python 3.</h4>
   <div id="tabs-1">
     {% for idx in lst_comments[:5] %}
     <p>
-      <a href="{{ url_for('packages_details', name=comments[idx][1].name) }}">{{ comments[idx][1].name }}</a> ({{ comments[idx][0].version }}) is
+      <a href="{{ url_for('packages_details', name=comments[idx][1].name) }}">{{ comments[idx][1].name }}</a> {{ (comments[idx][0].version) }} is
       <span class="{{ get_status(comments[idx][0].working)[0] }}">{{ get_status(comments[idx][0].working)[1] }}</span>
       for {{ comments[idx][0].fullname }} ({{ comments[idx][0].platform }}, {{ time_delta(comments[idx][0].datetime) }} ) <br/>
     </p>
