@@ -84,5 +84,5 @@ def packages(page=1):
     if request.method == 'POST':
         return redirect(url_for('search_package', name=request.form['pkgname'], page=1))
     else:
-        result = Distribution.query.paginate(page)
+        result = Distribution.query.order_by(Distribution.name).paginate(page)
         return render_template('show_package.html', page_obj=result)
