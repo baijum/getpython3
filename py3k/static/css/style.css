@@ -110,3 +110,11 @@ padding: 0 0 10px 0;
 tr.odd {
    background: #f1ffdf;
 }
+
+div#tabs-1 a { text-decoration: underline; }
+div#tabs-2 a { text-decoration: underline; }
+div#tabs-3 a { text-decoration: underline; }
+
+span.works { color: green }
+
+span.fails { color: red }
