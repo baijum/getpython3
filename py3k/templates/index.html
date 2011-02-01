@@ -27,13 +27,8 @@ also submit feedback about its compatibility with Python 3.</h4>
 
 <p></p>
 
-<div id="tabs">
-  <ul>
-	<li><a href="#tabs-1">Latest Feedback</a></li>
-	<!--li><a href="#tabs-2">Popular Distros</a></li-->
-	<li><a href="#tabs-3">Get Involved!</a></li>
-  </ul>
-  <div id="tabs-1">
+<h2>Latest feedback about Python libraries</h2>
+
     {% for idx in lst_comments[:6] %}
     <p>
       <img src="{{comments[idx][0].email | gravatar}}"/> <a href="{{ url_for('packages_details', name=comments[idx][1].name) }}">{{ comments[idx][1].name }}</a> {{ (comments[idx][0].version) }} is
@@ -42,11 +37,8 @@ also submit feedback about its compatibility with Python 3.</h4>
     </p>
   {% endfor %}
 
-  </div>
-  <div id="tabs-2">
-    <p></p>
-  </div>
-  <div id="tabs-3">
+<h2>Get Involved!</h2>
+
       The Python community needs your
       help.  <a href="http://python.org/download/releases/3.2/#download">
       Install Python 3.2</a> then try out your favourite Package and provide
@@ -55,12 +47,12 @@ also submit feedback about its compatibility with Python 3.</h4>
       We can then track the general "supported-ness" of Package distributions in
       Python 3.
 
-    <h4>Let us know your thoughts!</h4>
+<h4>Let us know your thoughts!</h4>
 
     Visit <a href="https://groups.google.com/forum/?msg=new&lnk=gcis&hl=en#!forum/getpython3">
     our forum</a> to report any bugs or pass on your suggestions.
 
-    <h4>Don't know where to start?</h4>
+<h4>Don't know where to start?</h4>
 
     <p>
       Try one of these... <br /><br />
@@ -68,8 +60,5 @@ also submit feedback about its compatibility with Python 3.</h4>
       <a href="{{ url_for('packages_details', name=distribution.name) }}">{{ distribution.name }}</a> <br/>
       {% endfor %}
     </p>
-  </div>
-</div>
-
 
 {% endblock %}
