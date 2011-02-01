@@ -43,7 +43,7 @@ def add_comment(name):
     working = request.form['working']
     platform = request.form['platform']
     version = request.form['version']
-    comment = request.form['comment[body]']
+    comment = request.form['comment']
     new_comment = Comment()
     result = Distribution.query.filter_by(name=name).first()
     new_comment.distribution_id = result.id
