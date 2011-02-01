@@ -11,3 +11,9 @@ TODO Items
 - The main idea is to create a site similar to: http://isitruby19.com/
 - Improve login form with better UI
 - Compress Jquery table plugin file using google closure
+
+Schame changes
+--------------
+
+alter table distributions add column pypi_page BOOLEAN;
+update distributions set pypi_page=1;

@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<h2>Want to use Python 3 for your next project ?</h2>
+
+<h4 style="color: #243F00">Find out all the third party libraries supported by Python 3!  You can
+also submit feedback about its compatibility with Python 3.</h4>
+
+<div>
+
+  <form action="{{ url_for('packages') }}" method=post>
+    <input onfocus="if(this.value == 'Search Distros') {this.value = ''}" style="opacity:0.4;font-size: 15pt" type=text name=pkgname size=20 value="Search Distros" />
+    <input style="font-size: 18pt" type=submit value="Search" />
+    <a style="text-decoration: underline" href="{{ url_for('packages') }}">Browse All</a>
+  </form>
+
+</div>
+<p>
+</p>
+
+<h3>Provide project details</h3>
+
+<form action="{{ url_for('save_new_project') }}" method=post>
+  Project Name 
+  <input type=text name=projectname size=30 /> <br />
+  
+  Home Page
+  <input type=text name=home_page size=30 /> <br />
+
+  Author(s)
+  <input type=text name=author size=30 /> <br />
+
+  Summary
+  <input type=text name=summary size=30 /> <br />
+  
+  <input type=submit value="Submit" />
+</form>
+
+<p>
+</p>
+
+{% endblock %}

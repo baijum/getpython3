@@ -33,8 +33,9 @@ class Distribution(db.Model):
     home_page = db.Column(db.String(50))
     author = db.Column(db.String(50))
     summary = db.Column(db.String(50))
+    pypi_page = db.Column(db.Boolean()) #True=Exist in PyPI
 
-    
+
 class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)

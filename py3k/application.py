@@ -45,4 +45,5 @@ gravatar = Gravatar(app,
 import model
 import auth
 import packages
+import nonpypi
 import main

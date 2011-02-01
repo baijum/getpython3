@@ -24,6 +24,7 @@ for name in diff_package_names:
     distribution.home_page = home_page
     distribution.author = author
     distribution.summary = summary
+    distribution.pypi_page = True
     db.session.add(distribution)
     try:
         db.session.commit()
