@@ -36,7 +36,7 @@ from .application import db
 from .utils import get_status, pretty_date
 
 
-@app.route('/package/<name>/add_comment', methods=['POST'])
+@app.route('/project/<name>/add_comment', methods=['POST'])
 def add_comment(name):
     fullname = request.form['fullname'].strip() or 'Anonymous'
     email = request.form['email']
@@ -63,7 +63,7 @@ def search_package(name, page=1):
     result = Distribution.query.filter(Distribution.name.like("%%%s%%"%name)).paginate(page)
     return render_template('search_package.html', page_obj=result, searchname=name)
 
-@app.route('/package/<name>')
+@app.route('/project/<name>')
 def packages_details(name):
     result = Distribution.query.filter_by(name=name).first()
     if result is None:
@@ -78,8 +78,8 @@ def packages_details(name):
     
 
 
-@app.route('/package', methods=['GET', 'POST'])
-@app.route('/package/+<int:page>')
+@app.route('/project', methods=['GET', 'POST'])
+@app.route('/project/+<int:page>')
 def packages(page=1):
     if request.method == 'POST':
         return redirect(url_for('search_package', name=request.form['pkgname'], page=1))
