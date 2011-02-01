@@ -38,7 +38,7 @@ from .utils import get_status, pretty_date
 
 @app.route('/package/<name>/add_comment', methods=['POST'])
 def add_comment(name):
-    fullname = request.form['fullname']
+    fullname = request.form['fullname'].strip() or 'Anonymous'
     email = request.form['email']
     working = request.form['working']
     platform = request.form['platform']
