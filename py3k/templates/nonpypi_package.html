@@ -32,7 +32,9 @@ also submit feedback about its compatibility with Python 3.</h4>
 
   Summary
   <textarea cols="60" name=summary rows="6"/></textarea> <br />
-  
+  Enter the letters here: <input type=text name=captchavalue size=30 />
+  <img src="{{ url_for('captcha', key=captcha_key) }}"/> <br />
+  <input type=hidden name=captchakey value={{ captcha_key }} />
   <input type=submit value="Submit" />
 </form>
 

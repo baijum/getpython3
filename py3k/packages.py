@@ -34,6 +34,8 @@ from .model import Comment
 from .application import app
 from .application import db
 from .utils import get_status, pretty_date
+from .captcha import get_captcha_key
+from .captcha import verify_captcha
 
 
 @app.route('/project/<name>/add_comment', methods=['POST'])
@@ -44,6 +46,10 @@ def add_comment(name):
     platform = request.form['platform']
     version = request.form['version']
     comment = request.form['comment']
+    captchakey = request.form['captchakey']
+    captchavalue = request.form['captchavalue']
+    if not verify_captcha(captchakey, captchavalue):
+        return redirect(url_for('packages_details', name=name))
     new_comment = Comment()
     result = Distribution.query.filter_by(name=name).first()
     new_comment.distribution_id = result.id
@@ -69,13 +75,13 @@ def packages_details(name):
     if result is None:
         return redirect(url_for('search_package', name=name, page=1))
     comments = Comment.query.filter_by(distribution_id=result.id).order_by(db.desc(Comment.datetime))
-        
     return render_template('package_details.html',
                            result=result,
                            comments=comments,
                            get_status=get_status,
-                           time_delta=pretty_date)
-    
+                           time_delta=pretty_date,
+                           captcha_key=get_captcha_key())
+
 
 
 @app.route('/project', methods=['GET', 'POST'])

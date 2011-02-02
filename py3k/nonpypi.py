@@ -34,6 +34,8 @@ from .model import Distribution
 #from .model import User
 from .model import Comment
 from .utils import get_status, pretty_date
+from .captcha import get_captcha_key
+from .captcha import verify_captcha
 
 
 @app.route('/save_new_project', methods=['POST'])
@@ -69,6 +71,10 @@ def save_new_project():
     home_page = request.form['home_page']
     author = request.form['author']
     summary = request.form['summary']
+    captchakey = request.form['captchakey']
+    captchavalue = request.form['captchavalue']
+    if not verify_captcha(captchakey, captchavalue):
+        return redirect(url_for('packages_details', name=name))
     distribution = Distribution()
     distribution.name = name
     distribution.home_page = home_page
@@ -81,4 +87,4 @@ def save_new_project():
 
 @app.route('/nonpypi')
 def nonpypipkg():
-    return render_template('nonpypi_package.html')
+    return render_template('nonpypi_package.html', captcha_key=get_captcha_key())
