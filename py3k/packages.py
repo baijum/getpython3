@@ -37,6 +37,35 @@ from .utils import get_status, pretty_date
 from .captcha import get_captcha_key
 from .captcha import verify_captcha
 
+from urlparse import urljoin
+from werkzeug.contrib.atom import AtomFeed
+
+
+def make_external(url):
+    return urljoin(request.url_root, "project", url)
+
+
+@app.route('/project/<name>/recent.atom')
+def recent_feed(name):
+    feed = AtomFeed("Project: %s"%name,
+                    feed_url=request.url, url=request.url_root)
+    result = Distribution.query.filter_by(name=name).first()
+    if result is None:
+        return redirect(url_for('search_package', name=name, page=1))
+    comments = Comment.query.filter_by(distribution_id=result.id).order_by(db.desc(Comment.datetime)).limit(5)
+
+    for comment in comments:
+        title = "%s has %s (%s) %s on %s" % (comment.fullname,
+                                             name, comment.version,
+                                             "Working" if comment.working else "Failing",
+                                             comment.platform)
+        feed.add(title, unicode(comment.comment),
+                 content_type='html',
+                 author=comment.fullname,
+                 url=make_external(name),
+                 updated=comment.datetime,
+                 published=comment.datetime)
+    return feed.get_response()
 
 @app.route('/project/<name>/add_comment', methods=['POST'])
 def add_comment(name):

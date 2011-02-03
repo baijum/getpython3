@@ -1,4 +1,11 @@
 {% extends "layout.html" %}
+{% block link %}
+<link href="{{ url_for('recent_feed', name=result.name) }}"
+      rel="alternate"
+      title="Recent Comments" 
+      type="application/atom+xml">
+{% endblock %}
+
 {% block body %}
 
 <h2>Want to use Python 3 for your next project ?</h2>
@@ -17,7 +24,13 @@ also submit feedback about its compatibility with Python 3.</h4>
 </div>
 <p>
 </p>
-<h2><a href="http://pypi.python.org/pypi/{{ result.name }}">{{ result.name }}</a></h2>
+<h2><a href="http://pypi.python.org/pypi/{{ result.name }}">{{ result.name }}</a>
+<a href="{{ url_for('recent_feed', name=result.name) }}"
+   rel="alternate"
+   title="Recent Comments" 
+   type="application/atom+xml"><img src="{{ url_for('.static', filename='feed-icon.png') }}" /></a>
+
+</h2>
 
 <dl>
   <dt>Home Page</dt>
