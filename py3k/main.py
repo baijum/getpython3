@@ -24,7 +24,10 @@
 # authors and should not be interpreted as representing official policies, either expressed
 # or implied, of Baiju M <baiju.m.mail@gmail.com>.
 
-from flask import render_template
+from flask import render_template, request, redirect, url_for
+from urlparse import urljoin
+from werkzeug.contrib.atom import AtomFeed
+
 
 from .application import app
 from .application import db
@@ -70,6 +73,48 @@ def index():
                            lst_comments=lst_comments,
                            get_status=get_status,
                            time_delta=pretty_date)
+
+
+def make_external(url):
+    return urljoin(request.url_root, "project", url)
+
+
+@app.route('/recent.atom')
+def recent_all_comment_feed():
+    feed = AtomFeed("Recent Project Comments",
+                    feed_url=request.url, url=request.url_root)
+    comments = db.session.query(Comment, Distribution).outerjoin(Distribution).order_by(db.desc(Comment.datetime)).limit(500)
+    package_names = []
+    lst_comments = []
+    idx = 0
+    for comment,distribution in comments:
+        if distribution.name not in package_names:
+            package_names.append(distribution.name)
+            lst_comments.append(idx)
+        idx += 1
+
+    for idx in lst_comments[:6]:
+
+        comments[idx][0].email
+        comments[idx][1].name
+        comments[idx][0].version
+        comments[idx][0].working
+        comments[idx][0].fullname
+        comments[idx][0].platform
+        comments[idx][0].datetime
+
+        title = "%s has %s (%s) %s on %s" % (comments[idx][0].fullname,
+                                             comments[idx][1].name, comments[idx][0].version,
+                                             "Working" if comments[idx][0].working else "Failing",
+                                             comments[idx][0].platform)
+        feed.add(title, unicode(comments[idx][0].comment),
+                 content_type='html',
+                 author=comment.fullname,
+                 url=make_external(comments[idx][1].name),
+                 updated=comment.datetime,
+                 published=comment.datetime)
+    return feed.get_response()
+
 
 @app.route('/credits')
 def credits():

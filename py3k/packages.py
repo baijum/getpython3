@@ -46,7 +46,7 @@ def make_external(url):
 
 
 @app.route('/project/<name>/recent.atom')
-def recent_feed(name):
+def recent_project_comment_feed(name):
     feed = AtomFeed("Project: %s"%name,
                     feed_url=request.url, url=request.url_root)
     result = Distribution.query.filter_by(name=name).first()

@@ -1,4 +1,11 @@
 {% extends "layout.html" %}
+{% block link %}
+<link href="{{ url_for('recent_all_comment_feed') }}"
+      rel="alternate"
+      title="Recent Project Comments" 
+      type="application/atom+xml" />
+{% endblock %}
+
 {% block script %}
 <script>
   $(function() {
@@ -27,7 +34,10 @@ also submit feedback about its compatibility with Python 3.</h4>
 
 <p></p>
 
-<h2>Latest feedback about Python libraries</h2>
+<h2>Latest feedback about Python libraries
+<a href="{{ url_for('recent_all_comment_feed') }}"
+   title="Recent Project Comments"><img src="{{ url_for('.static', filename='feed-icon.png') }}" /></a>
+</h2>
 
     {% for idx in lst_comments[:6] %}
     <p>
