@@ -16,7 +16,8 @@ setup(
                         'Flask-SQLAlchemy',
                         'Flask-OpenID',
                         'Flask-Script',
-                        'Flask-Gravatar'],
+                        'Flask-Gravatar',
+                        'captchaimage'],
     classifiers=[
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License'
