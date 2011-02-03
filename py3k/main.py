@@ -76,7 +76,7 @@ def index():
 
 
 def make_external(url):
-    return urljoin(request.url_root, "project", url)
+    return urljoin(request.url_root, "project/%s"% url)
 
 
 @app.route('/recent.atom')

@@ -42,7 +42,7 @@ from werkzeug.contrib.atom import AtomFeed
 
 
 def make_external(url):
-    return urljoin(request.url_root, "project", url)
+    return urljoin(request.url_root, "project/%s"%url)
 
 
 @app.route('/project/<name>/recent.atom')
