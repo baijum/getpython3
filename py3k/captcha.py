@@ -59,12 +59,14 @@ def get_captcha_image(code):
 
 @app.route('/captcha/<key>')
 def captcha(key):
+    global all_keys
     img = get_captcha_image(all_keys[key])
     headers = Headers()
     headers.add("Content-Type", "image/jpeg")
     return Response(img, headers=headers)
 
 def verify_captcha(key, value):
+    global all_keys
     if key not in all_keys:
         return False
     if all_keys[key] == value:
@@ -85,6 +87,7 @@ def randomword():
     return ''.join(final_word_list)
 
 def get_captcha_key():
+    global all_keys
     import uuid
     uuid4 = str(uuid.uuid4())
     all_keys[uuid4] = randomword()
