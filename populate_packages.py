@@ -1,3 +1,4 @@
+import sys
 from py3k.application import db
 from py3k.model import Distribution
 from sqlalchemy.exc import IntegrityError
@@ -10,7 +11,19 @@ existing_package_names = set([p.name for p in result])
 package_names = set(package_names)
 diff_package_names = existing_package_names ^ package_names
 
+demo = False
+count = 0
+try:
+    demo = sys.argv[1]
+    if demo == "--demo":
+        demo = True
+except KeyError:
+    pass
+
 for name in diff_package_names:
+    if demo and count > 100:
+        break
+    count = count + 1
     try:
         release_data = client.release_data(name, client.package_releases(name)[0])
     except IndexError:
