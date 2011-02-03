@@ -5,15 +5,17 @@ Copyright 2011 Baiju M <baiju.m.mail@gmail.com>. All rights reserved.
 
 Look at `LICENSE.txt` file for license.
 
-TODO Items
-----------
+Site: http://getpython3.net
+Code: https://github.com/baijum/getpython3
 
-- The main idea is to create a site similar to: http://isitruby19.com/
-- Improve login form with better UI
-- Compress Jquery table plugin file using google closure
+Installation (GNU/Linux)
+------------------------
 
-Schame changes
---------------
+1. Make sure you have Python and virtualenv installed in your system
+2. Run the `bootstrap_run.sh` script (Open this file and read!)
 
-alter table distributions add column pypi_page BOOLEAN;
-update distributions set pypi_page=1;
+Running application
+-------------------
+
+./ve/bin/python runserver.py
+
