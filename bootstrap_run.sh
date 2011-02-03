@@ -1,13 +1,15 @@
+VE=`pwd`/ve
 echo "Creating virtualenv"
-virtualenv --clear --no-site-packages ve
+virtualenv --clear --no-site-packages $VE
 echo "Installing PIL"
 wget -c http://dist.repoze.org/PIL-1.1.6.tar.gz
-./ve/bin/easy_install PIL-1.1.6.tar.gz 
+$VE/bin/easy_install PIL-1.1.6.tar.gz 
 echo "Installing dependencies"
-./ve/bin/python setup.py develop
+$VE/bin/python setup.py develop
+$VE/bin/easy_install Flask
 echo "Creating tables"
-./ve/bin/python create_tables.py
+$VE/bin/python create_tables.py
 echo "Populating tables with data"
-./ve/bin/python populate_packages.py --demo
+$VE/bin/python populate_packages.py --demo
 echo "Running server"
-./ve/bin/python runserver.py
+$VE/bin/python runserver.py
