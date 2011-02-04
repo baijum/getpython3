@@ -66,3 +66,10 @@ class Comment(db.Model):
     platform = db.Column(db.String(50))
     comment = db.Column(db.String(5000))
     datetime = db.Column(db.DateTime())
+
+
+class Tag(db.Model):
+    __tablename__ = 'tags'
+    id = db.Column(db.Integer, primary_key=True)
+    distribution_id = db.Column("distribution_id", db.Integer, db.ForeignKey('distributions.id'))
+    name = db.Column(db.String(50))
