@@ -26,27 +26,18 @@
 
 import os
 import random
-from flask import render_template
 
-from .application import app
-from .application import db
-
-from .model import Distribution
-#from .model import User
-from .model import Comment
-from .utils import get_status, pretty_date
-from flask import g, session
-from flask import send_file
-from cStringIO import StringIO
 from flask import Response
 from werkzeug import Headers
 
 import captchaimage
 import cStringIO
 from PIL import Image
+from .application import app
+
 all_keys = {}
 
-# Black text on white background
+
 def get_captcha_image(code):
     size_y = 32
     image_data = captchaimage.create_image(
@@ -57,6 +48,7 @@ def get_captcha_image(code):
         file, "JPEG", quality = 30)
     return file.getvalue()
 
+
 @app.route('/captcha/<key>')
 def captcha(key):
     global all_keys
@@ -64,6 +56,7 @@ def captcha(key):
     headers = Headers()
     headers.add("Content-Type", "image/jpeg")
     return Response(img, headers=headers)
+
 
 def verify_captcha(key, value):
     global all_keys
@@ -85,6 +78,7 @@ def randomword():
         pos = random.randrange(0,length)
         final_word_list.append(text[pos])
     return ''.join(final_word_list)
+
 
 def get_captcha_key():
     global all_keys

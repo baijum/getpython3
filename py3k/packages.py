@@ -26,9 +26,8 @@
 
 import datetime
 from flask import render_template, request, redirect, url_for
-#from flask import session
+
 from .model import Distribution
-#from .model import User
 from .model import Comment
 
 from .application import app
@@ -67,6 +66,7 @@ def recent_project_comment_feed(name):
                  published=comment.datetime)
     return feed.get_response()
 
+
 @app.route('/project/<name>/add_comment', methods=['POST'])
 def add_comment(name):
     fullname = request.form['fullname'].strip() or 'Anonymous'
@@ -93,10 +93,12 @@ def add_comment(name):
     db.session.commit()
     return redirect(url_for('packages_details', name=name))
 
+
 @app.route('/search/<name>/+<int:page>')
 def search_package(name, page=1):
     result = Distribution.query.filter(Distribution.name.like("%%%s%%"%name)).paginate(page)
     return render_template('search_package.html', page_obj=result, searchname=name)
+
 
 @app.route('/project/<name>')
 def packages_details(name):
@@ -110,7 +112,6 @@ def packages_details(name):
                            get_status=get_status,
                            time_delta=pretty_date,
                            captcha_key=get_captcha_key())
-
 
 
 @app.route('/project', methods=['GET', 'POST'])

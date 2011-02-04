@@ -24,7 +24,7 @@
 # authors and should not be interpreted as representing official policies, either expressed
 # or implied, of Baiju M <baiju.m.mail@gmail.com>.
 
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request
 from urlparse import urljoin
 from werkzeug.contrib.atom import AtomFeed
 
@@ -33,7 +33,6 @@ from .application import app
 from .application import db
 
 from .model import Distribution
-#from .model import User
 from .model import Comment
 from .utils import get_status, pretty_date
 

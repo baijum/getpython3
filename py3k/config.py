@@ -24,20 +24,24 @@
 # authors and should not be interpreted as representing official policies, either expressed
 # or implied, of Baiju M <baiju.m.mail@gmail.com>.
 
+
 class Config(object):
     DEBUG = False
     TESTING = False
     SQLALCHEMY_DATABASE_URI = 'sqlite:////var/tmp/getpython3.db'
     OPENID_FS_STORE_PATH = '/var/tmp/getpython3openid'
 
+
 class ProductionConfig(Config):
     #SQLALCHEMY_DATABASE_URI = 'mysql://user:passwd@localhost/db'
     pass
+
 
 class DevelopmentConfig(Config):
     DEBUG = True
     SECRET_KEY = 'secret'
     SQLALCHEMY_ECHO = True
+
 
 class TestinConfig(Config):
     TESTING = True

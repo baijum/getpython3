@@ -31,9 +31,6 @@ from .application import db
 from sqlalchemy.exc import IntegrityError
 
 from .model import Distribution
-#from .model import User
-from .model import Comment
-from .utils import get_status, pretty_date
 from .captcha import get_captcha_key
 from .captcha import verify_captcha
 
@@ -67,7 +64,7 @@ def save_new_project():
         except IntegrityError:
             db.session.rollback()
             return "Cannot create"
-        return "A page exist in PyPI" 
+        return "A page exist in PyPI"
     home_page = request.form['home_page']
     author = request.form['author']
     summary = request.form['summary']
@@ -84,6 +81,7 @@ def save_new_project():
     db.session.add(distribution)
     db.session.commit()
     return redirect(url_for('packages_details', name=name))
+
 
 @app.route('/nonpypi')
 def nonpypipkg():
