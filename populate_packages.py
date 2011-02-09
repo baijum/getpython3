@@ -17,7 +17,7 @@ try:
     demo = sys.argv[1]
     if demo == "--demo":
         demo = True
-except KeyError:
+except IndexError:
     pass
 
 for name in diff_package_names:
