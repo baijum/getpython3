@@ -29,6 +29,7 @@ from flask import render_template, request, redirect, url_for
 
 from .model import Distribution
 from .model import Comment
+from .model import Tag
 
 from .application import app
 from .application import db
@@ -43,6 +44,26 @@ from werkzeug.contrib.atom import AtomFeed
 def make_external(url):
     return urljoin(request.url_root, "project/%s"%url)
 
+@app.route('/project/<name>/tag/save', methods=['POST'])
+def save_tag(name):
+    tags = list(set(request.form['tags'].split()))
+    result = Distribution.query.filter_by(name=name).first()
+    Tag.query.filter_by(distribution_id=result.id).delete()
+    for tagname in tags:
+        tag = Tag()
+        tag.name = tagname
+        tag.distribution_id = result.id
+        db.session.add(tag)
+
+    db.session.commit()
+    return redirect(url_for('packages_details', name=name))
+
+@app.route('/project/<name>/tag/edit')
+def tag_edit(name):
+    result = Distribution.query.filter_by(name=name).first()
+    tags = Tag.query.filter_by(distribution_id=result.id)
+    existing_tags = ' '.join([x.name for x in tags])
+    return render_template('tag_edit.html', tags=tags, result=result, existing_tags=existing_tags)
 
 @app.route('/project/<name>/recent.atom')
 def recent_project_comment_feed(name):
@@ -106,11 +127,13 @@ def packages_details(name):
     if result is None:
         return redirect(url_for('search_package', name=name, page=1))
     comments = Comment.query.filter_by(distribution_id=result.id).order_by(db.desc(Comment.datetime))
+    tags = Tag.query.filter_by(distribution_id=result.id)
     return render_template('package_details.html',
                            result=result,
                            comments=comments,
                            get_status=get_status,
                            time_delta=pretty_date,
+                           tags=tags,
                            captcha_key=get_captcha_key())
 
 

@@ -39,6 +39,14 @@ also submit feedback about its compatibility with Python 3.</h4>
   <dd>{{ result.summary }}</dd>
 </dl>
 
+<h3>Tags</h3>
+
+{% for tag in tags %}
+  {{ tag.name }}
+{% endfor %}
+<br />
+<a href="{{ url_for('tag_edit', name=result.name) }}">Edit</a>
+
 <h3>Comments</h3>
 
 {% for comment in comments %}
