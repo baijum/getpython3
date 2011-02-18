@@ -11,15 +11,15 @@
 
 <h2>Want to use Python 3 for your next project ?</h2>
 
-<h4 style="color: #243F00">Find out all the third party libraries supported by Python 3!  You can
+<h4>Find out all the third party libraries supported by Python 3!  You can
 also submit feedback about its compatibility with Python 3.</h4>
 
 <div>
 
   <form action="{{ url_for('packages') }}" method=post>
-    <input onfocus="if(this.value == 'Search Distros') {this.value = ''}" style="opacity:0.4;font-size: 15pt" type=text name=pkgname size=20 value="Search Distros" />
+    <input onfocus="if(this.value == 'Search Distros') {this.value = ''}" onblur="if(this.value==''){this.value='Search Distros'}" style="opacity:0.4;font-size: 15pt" type=text name=pkgname size=20 value="Search Distros" />
     <input style="font-size: 18pt" type=submit value="Search" />
-    <a style="text-decoration: underline" href="{{ url_for('packages') }}">Browse All</a>
+    <a href="{{ url_for('packages') }}">Browse All</a>
   </form>
 
 </div>
@@ -28,7 +28,7 @@ also submit feedback about its compatibility with Python 3.</h4>
 
 <h2>Latest feedback about Python libraries
 <a href="{{ url_for('recent_all_comment_feed') }}"
-   title="Recent Project Comments"><img src="{{ url_for('.static', filename='feed-icon.png') }}" /></a>
+   title="Recent Project Comments"><img src="{{ url_for('.static', filename='feed-icon.png') }}" border="0"/></a>
 </h2>
 
     {% for idx in lst_comments[:6] %}
