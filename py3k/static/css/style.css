@@ -5,17 +5,15 @@ font-size: 13px;
 background: #feffff url(../images/bg.jpg) top repeat-x;
 margin: 0;
 padding: 0;
-color: #112211;
+color: #000000;
 }
-
-a { color: #243F00; text-decoration: none;}
-a:hover { text-decoration: underline; }
-
 #wrap { 
 width: 800px;
 margin: 20px auto;
 }
-
+h1, h2, h3, h4, a{
+color: #243F00; 
+}
 #header {
 background: url(../images/header.png) no-repeat;
 height: 110px;
@@ -51,7 +49,6 @@ margin: 15px 0;
 }
 #content h2 {
 margin: 0;
-color: #243F00;
 line-height: 30px;
 font-weight: 100;
 font-size: 20px;
@@ -75,7 +72,6 @@ height: 30px;
 line-height: 30px;
 font-weight: 100;
 margin: 0; padding: 0 0 0 10px; 
-color: #243F00;
 font-size: 15px;
 letter-spacing: -1px;
 }
@@ -94,7 +90,9 @@ background: url(../images/bullet.png) no-repeat center left;
 padding: 2px 0 2px 22px;
 margin: 0;
 }
-#sidebar ul li a {  }
+#sidebar ul li a {
+text-decoration: none;
+}
 
 #bottom { background: url(../images/bottom.png) no-repeat; padding: 10px 0; }
 
