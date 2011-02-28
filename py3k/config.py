@@ -28,8 +28,8 @@
 class Config(object):
     DEBUG = False
     TESTING = False
-    SQLALCHEMY_DATABASE_URI = 'sqlite:////var/tmp/test-getpython3.db'
-    OPENID_FS_STORE_PATH = '/var/tmp/test-getpython3openid'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:////var/tmp/getpython3.db'
+    OPENID_FS_STORE_PATH = '/var/tmp/getpython3openid'
 
 
 class ProductionConfig(Config):
