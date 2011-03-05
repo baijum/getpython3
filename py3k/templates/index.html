@@ -1,69 +1,40 @@
 {% extends "layout.html" %}
+
 {% block link %}
-<link href="{{ url_for('recent_all_comment_feed') }}"
-      rel="alternate"
-      title="Recent Project Comments" 
-      type="application/atom+xml" />
+<link href="{{ url_for('recent_all_comment_feed') }}" rel="alternate" title="Recent Project Comments" type="application/atom+xml" />
 {% endblock %}
 
 {% block body %}
 
+    <h2>Latest <span class="works">Python 3</span> feadbacks
+    <a href="{{ url_for('recent_all_comment_feed') }}" title="Recent Project Comments">
+    <img src="{{ url_for('.static', filename='images/rss.gif') }}"></a></h2>
 
-<h2>Want to use Python 3 for your next project ?</h2>
-
-<h4>Find out all the third party libraries supported by Python 3!  You can
-also submit feedback about its compatibility with Python 3.</h4>
-
-<div>
-
-  <form action="{{ url_for('packages') }}" method=post>
-    <input onfocus="if(this.value == 'Search Distros') {this.value = ''}" onblur="if(this.value==''){this.value='Search Distros'}" style="opacity:0.4;font-size: 15pt" type=text name=pkgname size=20 value="Search Distros" />
-    <input style="font-size: 18pt" type=submit value="Search" />
-    <a href="{{ url_for('packages') }}">Browse All</a>
-  </form>
-
-</div>
-
-<p></p>
-
-<h2>Latest feedback about Python libraries
-<a href="{{ url_for('recent_all_comment_feed') }}"
-   title="Recent Project Comments"><img src="{{ url_for('.static', filename='feed-icon.png') }}" border="0"/></a>
-</h2>
-
-    {% for idx in lst_comments[:6] %}
-    <p>
-      <img src="{{comments[idx][0].email | gravatar}}"/> <a href="{{ url_for('packages_details', name=comments[idx][1].name) }}">{{ comments[idx][1].name }}</a> {{ (comments[idx][0].version) }} is
-      <span class="{{ get_status(comments[idx][0].working)[0] }}">{{ get_status(comments[idx][0].working)[1] }}</span>
-      for {{ comments[idx][0].fullname }} ({{ comments[idx][0].platform }}, {{ time_delta(comments[idx][0].datetime) }} ) <br/>
-    </p>
-  {% endfor %}
-
-<h2>Get Involved!</h2>
-
-      The Python community needs your
-      help.  <a target="_blank" href="http://python.org/download/releases/3.2/#download">
-      Install Python 3.2</a> then try out your favourite Package and provide
-      feedback here.  We can then track the general "supported-ness" of
-      Package distributions in Python 3. <br /><br />
-
-      If the package you are looking for is not available
-      in <a target="_blank" href="http://pypi.python.org/pypi">PyPI</a>.  And if you want to
-      provide feedback, you can
-      <a href="{{ url_for('nonpypipkg') }}">add the package to this list from here</a>.
-
-<h4>Let us know your thoughts!</h4>
-
-    Visit <a target="_blank" href="https://groups.google.com/forum/?msg=new&lnk=gcis&hl=en#!forum/getpython3">
-    our forum</a> to report any bugs or pass on your suggestions.
-
-<h4>Don't know where to start?</h4>
+    {% for idx in lst_comments[:8] %}
 
     <p>
-      Try one of these... <br /><br />
-      {% for distribution in no_comments_packages %}
-      <a href="{{ url_for('packages_details', name=distribution.name) }}">{{ distribution.name }}</a> <br/>
-      {% endfor %}
+        <!-- <img src="{{comments[idx][0].email | gravatar}}"/> -->
+        <a href="{{ url_for('packages_details', name=comments[idx][1].name) }}">
+        {{ comments[idx][1].name }}</a> is
+        <span class="{{ get_status(comments[idx][0].working)[0] }}">
+        {{ get_status(comments[idx][0].working)[1] }}</span>
+        <span class="less">
+        for {{ comments[idx][0].fullname }} ({{ comments[idx][0].platform }},
+        {{ time_delta(comments[idx][0].datetime) }} )
+        </span>
     </p>
 
+    {% endfor %}
+
+{% endblock %}
+
+{% block trypkg %}
+    <ul>
+        <li>
+            {% for distribution in no_comments_packages %}
+            <a href="{{ url_for('packages_details', name=distribution.name) }}">
+            {{ distribution.name }}</a>
+            {% endfor %}
+        </li>
+    </ul>
 {% endblock %}

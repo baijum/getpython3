@@ -1,106 +1,84 @@
 {% extends "layout.html" %}
+
 {% block link %}
-<link href="{{ url_for('recent_project_comment_feed', name=result.name) }}"
-      rel="alternate"
-      title="Recent Comments" 
-      type="application/atom+xml" />
+<link href="{{ url_for('recent_project_comment_feed', name=result.name) }}" rel="alternate" title="Recent Comments" type="application/atom+xml" />
 {% endblock %}
 
 {% block body %}
 
-<h2>Want to use Python 3 for your next project ?</h2>
+    <h2>
+        <a target="_blank" href="http://pypi.python.org/pypi/{{ result.name }}">{{ result.name }}</a>
+        <a href="{{ url_for('recent_project_comment_feed', name=result.name) }}" title="Recent Comments">
+        <img src="{{ url_for('.static', filename='images/rss.gif') }}" /></a>
+    </h2>
 
-<h4 style="color: #243F00">Find out all the third party libraries supported by Python 3!  You can
-also submit feedback about its compatibility with Python 3.</h4>
+    <dl>
+      <dt>Home Page</dt>
+      <dd><a href="{{ result.home_page }}">{{ result.home_page }}</a></dd>
+      <dt>Author(s)</dt>
+      <dd>{{ result.author }}</dd>
+      <dt>Summary</dt>
+      <dd>{{ result.summary }}</dd>
+    </dl>
 
-<div>
+    <h3>Tags</h3>
 
-  <form action="{{ url_for('packages') }}" method=post>
-    <input onfocus="if(this.value == 'Search Distros') {this.value = ''}" style="opacity:0.4;font-size: 15pt" type=text name=pkgname size=20 value="Search Distros" />
-    <input style="font-size: 18pt" type=submit value="Search" />
-    <a style="text-decoration: underline" href="{{ url_for('packages') }}">Browse All</a>
-  </form>
+    {% for tag in tags %}
+      {{ tag.name }}
+    {% endfor %}
+    <br />
+    <a href="{{ url_for('tag_edit', name=result.name) }}">Edit</a>
 
-</div>
-<p>
-</p>
-<h2><a href="http://pypi.python.org/pypi/{{ result.name }}">{{ result.name }}</a>
-<a href="{{ url_for('recent_project_comment_feed', name=result.name) }}"
-   title="Recent Comments"><img src="{{ url_for('.static', filename='feed-icon.png') }}" /></a>
+    <h3>Comments:</h3>
 
-</h2>
-
-<dl>
-  <dt>Home Page</dt>
-  <dd><a href="{{ result.home_page }}">{{ result.home_page }}</a></dd>
-  <dt>Author(s)</dt>
-  <dd>{{ result.author }}</dd>
-  <dt>Summary</dt>
-  <dd>{{ result.summary }}</dd>
-</dl>
-
-<h3>Tags</h3>
-
-{% for tag in tags %}
-  {{ tag.name }}
-{% endfor %}
-<br />
-<a href="{{ url_for('tag_edit', name=result.name) }}">Edit</a>
-
-<h3>Comments</h3>
-
-{% for comment in comments %}
-<p>
-  <img src="{{comment.email | gravatar}}"/> {{ comment.fullname }}
-  has {{ result.name }} {{ (comment.version) }}  <span class="{{ get_status(comment.working)[0] }}">{{ get_status(comment.working)[1] }}</span>
-  on  {{ comment.platform }} : {{ time_delta(comment.datetime) }} <br/>
-  <pre>
-    {{ comment.comment }}
-  </pre>
-</p>
-{% endfor %}
+    {% for comment in comments %}
+    <p>
+      <img src="{{comment.email | gravatar}}"/>
+      {{ comment.fullname }} has {{ result.name }} {{ (comment.version) }}
+      <span class="{{ get_status(comment.working)[0] }}">{{ get_status(comment.working)[1] }}</span>
+      on  {{ comment.platform }} : {{ time_delta(comment.datetime) }} <br/>
+      <pre>
+        {{ comment.comment }}
+      </pre>
+    </p>
+    {% endfor %}
 
 
-<h3>Add your comment</h3>
-<form action="{{ url_for('packages_details', name=result.name) }}/add_comment" method=post>
-  Name 
-  <input type=text name=fullname size=30 /> <br />
-  
-  Email 
-  <input type=text name=email size=30 /> <br />
-  
-  <p>
-    Works for me 
-    <input checked="checked" id="working" name="working" type="radio" value="true">
-    Yes
-    <input id="working" name="working" type="radio" value="false">
-    No
-  </p>
-  <p>
-    Platform
-    <select id="platform" name="platform">
-      <option value="GNU/Linux">GNU/Linux</option>
-      <option value="Windows">Windows</option>
-      <option value="Mac OSX">Mac OSX</option>
-      <option value="FreeBSD">FreeBSD</option>
-      <option value="OpenBSD">OpenBSD</option>
-      <option value="NetBSD">NetBSD</option>
-      <option value="Solaris">Solaris</option>
-      <option value="Other">Other</option>
-    </select>
-  </p>
-  Version 
-  <input type=text name=version size=30 /> <br />
-  Comments (optional) <br/>
-  <textarea cols="60" id="comment_body" name="comment" rows="6"></textarea> <br />
-  Enter the letters here: <input type=text name=captchavalue size=30 />
-  <img src="{{ url_for('captcha', key=captcha_key) }}"/> <br />
-  <input type=hidden name=captchakey value={{ captcha_key }} />
-  <input type=submit value="Submit" />
-</form>
+    <h3>Add your comment</h3>
+    <form action="{{ url_for('packages_details', name=result.name) }}/add_comment" method=post>
+        <label for="name">Name:</label>
+        <input id="name" name='fullname'> <br />
+        <label for="email">Email:</label>
+        <input id="email" type='email' name='email'> <br />
 
-<p>
-  
-</p>
+        <p>
+            Works for me
+            <label><input checked="checked" id="working" name="working" type="radio" value="true">Yes</label>
+            <label><input id="working" name="working" type="radio" value="false">No</label>
+        </p>
+
+        <p>
+            Platform
+            <select id="platform" name="platform">
+                <option value="GNU/Linux">GNU/Linux</option>
+                <option value="Windows">Windows</option>
+                <option value="Mac OSX">Mac OSX</option>
+                <option value="FreeBSD">FreeBSD</option>
+                <option value="OpenBSD">OpenBSD</option>
+                <option value="NetBSD">NetBSD</option>
+                <option value="Solaris">Solaris</option>
+                <option value="Other">Other</option>
+            </select>
+        </p>
+
+        <label for="ver">Version:</label>
+        <input id='ver' name='version'> <br />
+        <label for="comment_body">Comments (optional):</label> <br/>
+        <textarea cols="60" id="comment_body" name="comment" rows="6"></textarea> <br />
+        <label for="cap">Enter the letters here: </label><input id='cap' name='captchavalue'>
+        <img src="{{ url_for('captcha', key=captcha_key) }}"/> <br />
+        <input type=hidden name=captchakey value={{ captcha_key }} />
+        <input type=submit value="Submit" />
+    </form>
 
 {% endblock %}

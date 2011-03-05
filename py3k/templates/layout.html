@@ -1,106 +1,201 @@
-<!doctype html>
-<html>
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<!DOCTYPE html>
+
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
     {% block title %}<title>Get Python 3</title>{% endblock %}
     {% block link %}{% endblock %}
-    <link rel="stylesheet" type="text/css" href="{{ url_for('.static', filename='css/style.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ url_for('.static', filename='css/jquery-ui-base-1.8.9.css') }}" />
-    <script src="{{ url_for('.static', filename='js/jquery-1.4.4.min.js') }}"></script>
-    <script src="{{ url_for('.static', filename='js/jquery-ui-1.8.9.min.js') }}"></script>
-    <script src="{{ url_for('.static', filename='js/paginatetable.js') }}"></script>
-    {% block script %}{% endblock %}
+    <meta name="description" content="">
+    <meta name="author" content="Arun.K.R <arun@ubiqurio.com>">
 
-  </head>
-  <body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ url_for('.static', filename='favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ url_for('.static', filename='apple-touch-icon.png') }}">
 
-    <div id="wrap">
+    <link rel="stylesheet" href="{{ url_for('.static', filename='css/style.css') }}">
+    <script src="{{ url_for('.static', filename='js/modernizr-1.6.min.js') }}"></script>
+</head>
+<body>
 
-      <div id="header">
+  <div id="container">
 
-        <h1><a href="{{ url_for('index') }}">Python 3</a></h1>
-        <h2>Beautiful, Explicit and Simple.</h2>
+    <header>
+        <section id="logo">
+            <span class="big">get</span>
+            <span class="works">python</span>
+            <span>3</span>
+            <span class="big">.net</span>
+        </section>
+        <section id="sub">
+            <h1>Want to use <span class="works">Python 3</span><br> for your next project ?</h1>
+            <p>Find out all the third party libraries supported by Python 3! You can also submit feedback about its compatibility with Python 3.</p>
+        </section> <br style="clear: both;">
+        <form action="action="{{ url_for('packages') }}" method="post">
+            <input id="search" type="search" name=pkgname placeholder="Search Distros" autofocus required>
+            <input value="Search" type="submit">
+            <a href="{{ url_for('packages') }}">Browse All</a>
+        </form>
+    </header>
 
-      </div>
+    <section id="main">
+        <article>
 
-      <div id="headerbottom">
-      </div>
+            {% block body %}{% endblock %}
 
-      <div id="contentwrap">
+        </article>
 
-        <div id="content">
+        <article>
+            <h2>Get Involved!</h2>
+            <section>
+                <p>
+                The Python community needs your help. <a href="http://python.org/download/releases/3.2/#download">Install Python 3.2</a>
+                then try out your favourite Package and provide feedback here. We can then track the general "supported-ness" of Package distributions in Python 3.
+                </p>
+                <p>
+                If the package you are looking for is not available in <a target="_blank" href="http://pypi.python.org/pypi">PyPI</a>, and if you want to provide feedback,
+                 you can add the package to this list using the form at your right. ==>>
+                </p>
+                <p>
+                Visit <a target="_blank" href="https://groups.google.com/forum/?msg=new&amp;lnk=gcis&amp;hl=en#%21forum/getpython3">our forum</a> to report any bugs or pass on your suggestions.
+                </p>
+                <p id="dwnld">
+                    <a target="_blank" href="http://python.org/download/releases/3.2/#download">
+                    Download <span>Python3</span></a>
+                </p>
+            </section>
+            <section><form action="{{ url_for('save_new_project') }}" method=post>
+                <p>
+                    <label for="prjname">Project Name</label>
+                    <input id="prjname" name='projectname' placeholder="Project name">
+                </p>
+                <p>
+                    <label for="homepg">Homepage</label>
+                    <input id="homepg" type='url' name='home_page' placeholder="http://">
+                </p>
+                <p>
+                    <label for="auth">Authors</label>
+                    <input id="auth" name='author' placeholder="Author(s)">
+                </p>
+                <p>
+                    <label for="summary">Summary</label>
+                    <textarea id="summary" name='summary' placeholder="Some cool information about your wonderful project..." rows="6" cols="60"></textarea>
+                </p>
+                <p>
+                    <label for="cap">Enter the letters here:</label>
+                    <input id="cap" name='captchavalue'>
+                    <img src="{{ url_for('captcha', key=captcha_key) }}" />
+                </p>
+                <input type=hidden name=captchakey value={{ captcha_key }}>
+                <p><input value="Submit" type="submit"></p>
+            </form></section>
+        </article>
+    </section>
 
-          {% block body %}{% endblock %}
+    <br style="clear: both;">
+
+    <footer>
+        <section>
+            <nav>
+                <h3>Books</h3>
+                <ul>
+                    <li>
+                        <a target="_blank" href="http://www.swaroopch.com/notes/Python">A Byte of Python by Swaroop C H</a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="http://diveintopython3.org/">Dive Into Python 3 by Mark Pilgrim</a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="http://www.qtrac.eu/py3book.html">Programming in Python 3 by Mark Summerfield</a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="https://www.packtpub.com/python-3-object-oriented-programming/book">Python
+         3 Object Oriented Programming</a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="http://mcsp.wartburg.edu/zelle/python/">Python Programming: An
+        Introduction to Computer Science by John M. Zelle, Ph.D.</a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="http://www.rmi.net/%7Elutz/about-pp4e.html">Programming Python by
+        Mark Lutz</a>
+                    </li>
+                </ul>
+            </nav>
+            <nav>
+                <h3>Articles/Blogs</h3>
+                <ul>
+                    <li>
+                        <a target="_blank" href="http://wiki.python.org/moin/Python2orPython3">Python 2 or 3</a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="http://wiki.python.org/moin/PortingPythonToPy3k">Porting Python 3</a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="http://docs.python.org/dev/howto/pyporting.html">Porting Python 2  Code to Python 3 (HOWTO)</a>
+                    </li>
+                </ul>
+            </nav>
+            <nav>
+                <h3>Libraries</h3>
+                <ul>
+                    <li>
+                        <a target="_blank" href="http://bottle.paws.de/docs/dev/index.html">Bottle (Web Framework)</a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="http://live.gnome.org/PyGObject">PyGObject (Desktop/GUI)</a>
+                    </li>
+                    <li>
+                        <a target="_blank" href="http://www.riverbankcomputing.com/news">PyQt (Desktop/GUI)</a>
+                    </li>
+                </ul>
+            </nav>
+            <nav>
+                <h3>Don't know where to start?</h3>
+
+                {% block trypkg %}{% endblock %}
+
+            </nav>
+        </section>
+        <section id="footer">
+            <p>&copy; Copyright 2011 <a target="_blank" href="http://baijum81.livejournal.com/">Baiju M &lt;baiju.m.mail AT gmail.com&gt;</a> </p>
+            <p>design <a target="_blank" href="http://www.ubiqurio.com/">Ubiqurio Consultancy</a> | <a target="_blank" href="http://flask.pocoo.org/">Flask Powered</a> | <a target="_blank" href="http://isitruby19.com/">Inspired By isitruby19.com</a></p>
+            <p> <a href="{{ url_for('.credits') }}">Credits</a> | <a target="_blank" href="https://github.com/baijum/getpython3"><strong><em>Contribute!</em></strong></a></p>
+        </section>
+    </footer>
+  </div> <!-- end of #container -->
 
 
-        </div>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="js/jquery-1.4.4.js"%3E%3C/script%3E'))</script>
 
-        <div id="sidebar">
-          <h3>Download</h3>
-          <a target="_blank" href="http://python.org/download/releases/3.2/#download">
-            <img style="border: transparent" width="100%" src="{{ url_for('.static', filename='python-logo.png') }}" alt="image" /></a>
+  <script src="{{ url_for('.static', filename='js/paginatetable.js') }}"></script>
+  <script src="{{ url_for('.static', filename='js/plugins.js') }}"></script>
+  {% block script %}{% endblock %}
 
-          <h3>Libraries</h3>
-          <ul>
-            <li><a target="_blank" href="http://bottle.paws.de/docs/dev/index.html">Bottle (Web Framework)</a></li>
-            <li><a target="_blank" href="http://live.gnome.org/PyGObject">PyGObject (Desktop/GUI)</a></li>
-            <li><a target="_blank" href="http://www.riverbankcomputing.com/news">PyQt (Desktop/GUI)</a></li>
 
-            <!--li><a href="libraries.html">More...</a></li-->
-          </ul>
+  <!--[if lt IE 7 ]>
+    <script src="js/libs/dd_belatedpng.js"></script>
+    <script> DD_belatedPNG.fix('img, .png_bg'); </script>
+  <![endif]-->
 
-          <h3>Books</h3>
-          <ul>
 
-            <li><a target="_blank" href="http://www.swaroopch.com/notes/Python">A Byte of Python by Swaroop C H</a></li>
-            <li><a target="_blank" href="http://diveintopython3.org/">Dive Into Python 3 by Mark Pilgrim</a></li>
-            <li><a target="_blank" href="http://www.qtrac.eu/py3book.html">Programming in Python 3 by Mark Summerfield</a></li>
-            <li><a target="_blank" href="https://www.packtpub.com/python-3-object-oriented-programming/book">Python 3 Object Oriented Programming</a></li>
-            <li><a target="_blank" href="http://mcsp.wartburg.edu/zelle/python/">Python Programming: An Introduction to Computer Science by John M. Zelle, Ph.D.</a></li>
-            <li><a target="_blank" href="http://www.rmi.net/~lutz/about-pp4e.html">Programming Python by Mark Lutz</a></li>
-            <!--li><a href="books.html">More...</a></li-->
-          </ul>
+  <!-- change the UA-XXXXX-X to be your site's ID -->
+  <script>
+   var _gaq = [['_setAccount', 'UA-XXXXX-X'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
 
-          <h3>Articles/Blogs</h3>
-          <ul>
-            <li><a target="_blank" href="http://wiki.python.org/moin/Python2orPython3">Python 2 or 3</a></li>
-            <li><a target="_blank" href="http://wiki.python.org/moin/PortingPythonToPy3k">Porting Python 3</a></li>
-            <li><a target="_blank" href="http://docs.python.org/dev/howto/pyporting.html">Porting Python 2 Code to Python 3 (HOWTO)</a></li>
-            <!--li><a href="articles.html">More...</a></li-->
-          </ul>
-          <!-- <h3> -->
-          <!--   {% if not session.openid %} -->
-          <!--   <a href="{{ url_for('.login') }}">Login</a> -->
-          <!--   {% else %} -->
-          <!--   <a href="{{ url_for('.logout') }}">Logout</a> -->
-          <!--   {% endif %} -->
-          <!-- </h3> -->
-        </div>
-
-        <div style="clear: both;"> </div>
-
-      </div>
-
-      <div id="bottom"> </div>
-
-      <div id="footer">
-        <p>
-          &copy; Copyright 2011
-          <a target="_blank" href="http://baijum81.livejournal.com/">Baiju M &lt;baiju.m.mail AT gmail.com&gt;</a>
-        </p>
-        <p>
-          <a target="_blank" href="http://www.blogliber.com/xhtmlcss-templates/green-property-free-web-template/">Green Template</a>
-          by <a target="_blank" href="http://www.blogliber.com">Blog Liber</a>
-          | <a target="_blank" href="http://flask.pocoo.org">Flask Powered</a>
-          | <a target="_blank" href="http://isitruby19.com/">Inspired By isitruby19.com</a>
-        </p>
-        <p>
-          <a href="{{ url_for('.credits') }}">Credits</a>
-          | <a target="_blank" href="https://github.com/baijum/getpython3"><strong><em>Contribute!</em></strong></a></p>
-      </div>
-
-    </div>
-
-  </body>
+</body>
 </html>
