@@ -140,8 +140,11 @@ def packages_details(name):
 @app.route('/project', methods=['GET', 'POST'])
 @app.route('/project/+<int:page>')
 def packages(page=1):
-    if request.method == 'POST':
+    if request.method == 'POST': # if some one searched, then
         return redirect(url_for('search_package', name=request.form['pkgname'], page=1))
-    else:
+    else: # for browse all
         result = Distribution.query.order_by(Distribution.name).paginate(page)
-        return render_template('show_package.html', page_obj=result)
+        no_comments_packages = db.session.query(Distribution).outerjoin(Comment).filter(Comment.distribution_id==None).limit(5)
+        return render_template('show_package.html',
+                                no_comments_packages=no_comments_packages,
+                                page_obj=result)

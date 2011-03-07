@@ -184,9 +184,10 @@ header>form a:hover{
 
 section#main > article{
     padding-top:20px;
-    height: 270px;
+    min-height: 270px;
+    width:100%;
     text-align:center;
-    position:relative;
+    float:left;
 }
 section#main > article h2{
     font-weight:normal;
@@ -195,7 +196,7 @@ section#main > article h2{
 }
 section#main > article:first-child{
     background: #f9f9f9;
-    overflow:hidden;
+    /*overflow:hidden;*/
 }
 section#main > article:first-child ul#credits{
     list-style:decimal-leading-zero;
