@@ -120,10 +120,17 @@ section#logo{
     height: 150px;
     margin-bottom:20px;
 }
-section#logo > span:nth-child(odd){
+section#logo > a, section#logo > a:hover{
+    text-decoration:none;
+    display:block;
+    height:100%;
+    width:100%;
+    color:inherit;
+}
+section#logo span:nth-child(odd){
     font-size:36px;
 }
-section#logo > span:nth-child(even){
+section#logo span:nth-child(even){
     font-size:26px;
 }
 section#sub{

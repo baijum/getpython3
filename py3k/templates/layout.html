@@ -26,18 +26,18 @@
   <div id="container">
 
     <header>
-        <section id="logo">
+        <section id="logo"><a href="{{ url_for('index') }}">
             <span class="big">get</span>
             <span class="works">python</span>
             <span>3</span>
             <span class="big">.net</span>
-        </section>
+        </a></section>
         <section id="sub">
             <h1>Want to use <span class="works">Python 3</span><br> for your next project ?</h1>
             <p>Find out all the third party libraries supported by Python 3! You can also submit feedback about its compatibility with Python 3.</p>
         </section> <br style="clear: both;">
-        <form action="action="{{ url_for('packages') }}" method="post">
-            <input id="search" type="search" name=pkgname placeholder="Search Distros" autofocus required>
+        <form action="{{ url_for('packages') }}" method="post">
+            <input id="search" type="search" name='pkgname' placeholder="Search Distros" autofocus required>
             <input value="Search" type="submit">
             <a href="{{ url_for('packages') }}">Browse All</a>
         </form>
