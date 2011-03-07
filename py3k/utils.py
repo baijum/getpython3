@@ -34,7 +34,7 @@ def get_status(working):
     else:
         working_status = 'fails'
         working_status_text = 'Failing'
-    return working_status, working_status_text
+    return working_status, working_status_text # css class and display text
 
 
 def pretty_date(time=False):

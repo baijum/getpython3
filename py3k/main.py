@@ -32,6 +32,7 @@ from werkzeug.contrib.atom import AtomFeed
 from .application import app
 from .application import db
 
+from .captcha import get_captcha_key
 from .model import Distribution
 from .model import Comment
 from .utils import get_status, pretty_date
@@ -70,6 +71,7 @@ def index():
                            comments=comments,
                            no_comments_packages=no_comments_packages,
                            lst_comments=lst_comments,
+                           captcha_key=get_captcha_key(),
                            get_status=get_status,
                            time_delta=pretty_date)
 

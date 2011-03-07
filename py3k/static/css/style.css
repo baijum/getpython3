@@ -188,6 +188,7 @@ section#main > article h2{
 }
 section#main > article:first-child{
     background: #f9f9f9;
+    overflow:hidden;
 }
 section#main > article:first-child ul#credits{
     list-style:decimal-leading-zero;
@@ -265,6 +266,10 @@ section form p input, section form p textarea{
 }
 section form p textarea{
     width: 305px;
+    resize:none; /* for webkit */
+}
+section form p input#cap{
+    width:200px;
 }
 section form p input[type="submit"]{
     width: 80px;

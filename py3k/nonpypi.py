@@ -31,7 +31,6 @@ from .application import db
 from sqlalchemy.exc import IntegrityError
 
 from .model import Distribution
-from .captcha import get_captcha_key
 from .captcha import verify_captcha
 
 
@@ -81,8 +80,3 @@ def save_new_project():
     db.session.add(distribution)
     db.session.commit()
     return redirect(url_for('packages_details', name=name))
-
-
-@app.route('/nonpypi')
-def nonpypipkg():
-    return render_template('nonpypi_package.html', captcha_key=get_captcha_key())
