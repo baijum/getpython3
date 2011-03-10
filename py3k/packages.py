@@ -118,6 +118,7 @@ def add_comment(name):
 @app.route('/search/<name>/+<int:page>')
 def search_package(name, page=1):
     result = Distribution.query.filter(Distribution.name.like("%%%s%%"%name)).paginate(page)
+    no_comments_packages = db.session.query(Distribution).outerjoin(Comment).filter(Comment.distribution_id==None).limit(5)
     return render_template('search_package.html',
                             page_obj=result,
                             end_point='search_package',

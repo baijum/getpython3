@@ -23,8 +23,8 @@
     <table id="myTable">
         <thead>
             <tr>
-              <th>Distribution</th>
-              <th>Description</th>
+              <th scope="col">Distribution</th>
+              <th scope="col">Description</th>
             </tr>
         </thead>
         <tbody>
@@ -36,6 +36,8 @@
             {%- endfor %}
         <tbody>
     </table>
+
+    {{ render_pagination(page_obj, end_point) }}
 
 {% endblock %}
 

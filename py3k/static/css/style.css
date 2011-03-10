@@ -87,6 +87,8 @@ button {  width: auto; overflow: visible; }
 
 .works{color:#647e02;}
 .fails{color:red;}
+.odd{background: #F4F9F9;}
+.even{background:#F4F4F2;}
 input[type="search"] { -webkit-appearance: textfield;}
 input, #dwnld {
     border-radius:5px;
@@ -288,6 +290,22 @@ section form p input[type="submit"]{
     font-weight:bold;
     margin-left: 110px;
     margin-top: 5px;
+}
+table#myTable{
+    width: 90%;
+    text-align: left;
+    margin: 0px 5%;
+}
+table#myTable thead{
+    border-bottom: 2px inset black;
+    color:white;
+    background-color:#A4A4A2;
+}
+table#myTable td, table#myTable th{
+    padding:10px;
+}
+table#myTable td{
+    border-bottom: 1px outset gray;
 }
 footer{
     background: #e6e6e6;

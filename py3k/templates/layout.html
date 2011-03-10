@@ -37,7 +37,7 @@
             <p>Find out all the third party libraries supported by Python 3! You can also submit feedback about its compatibility with Python 3.</p>
         </section> <br style="clear: both;">
         <form action="{{ url_for('packages') }}" method="post">
-            <input id="search" type="search" name='pkgname' placeholder="Search Distros" autofocus required>
+            <input id="search" type="search" name='pkgname' placeholder="Search Distros" autofocus required {% if searchname %} value={{ searchname }} {% endif %}>
             <input value="Search" type="submit">
             <a href="{{ url_for('packages') }}">Browse All</a>
         </form>
