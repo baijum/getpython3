@@ -12,52 +12,37 @@
         <img src="{{ url_for('.static', filename='images/rss.gif') }}" /></a>
     </h2>
 
-    <dl>
-      <dt>Home Page</dt>
-      <dd><a href="{{ result.home_page }}">{{ result.home_page }}</a></dd>
-      <dt>Author(s)</dt>
-      <dd>{{ result.author }}</dd>
-      <dt>Summary</dt>
-      <dd>{{ result.summary }}</dd>
-    </dl>
+    <div id="data">
+        <dl>
+          <dt>Home Page</dt>
+          <dd><a href="{{ result.home_page }}">{{ result.home_page }}</a></dd>
+          <dt>Author(s)</dt>
+          <dd>{{ result.author }}</dd>
+          <dt>Summary</dt>
+          <dd>{{ result.summary }}</dd>
+        </dl>
 
-    <h3>Tags</h3>
+        <h3>Tags</h3>
 
-    {% for tag in tags %}
-      {{ tag.name }}
-    {% endfor %}
-    <br />
-    <a href="{{ url_for('tag_edit', name=result.name) }}">Edit</a>
+        {% for tag in tags %}
+          {{ tag.name }}
+        {% endfor %}
+        <br />
+        <a href="{{ url_for('tag_edit', name=result.name) }}">Edit</a>
+    </div>
 
-    <h3>Comments:</h3>
+    <div id="addcmnt">
+        <h3>Add your comment</h3>
+        <form action="{{ url_for('packages_details', name=result.name) }}/add_comment" method=post id="frm">
+            <label for="name">Full Name:</label>
+            <input id="name" name='fullname' placeholder="Your Full Name">
+            <label for="email">Email:</label>
+            <input id="email" type='email' name='email' placeholder="____@____.__">
 
-    {% for comment in comments %}
-    <p>
-      <img src="{{comment.email | gravatar}}"/>
-      {{ comment.fullname }} has {{ result.name }} {{ (comment.version) }}
-      <span class="{{ get_status(comment.working)[0] }}">{{ get_status(comment.working)[1] }}</span>
-      on  {{ comment.platform }} : {{ time_delta(comment.datetime) }} <br/>
-      <pre>
-        {{ comment.comment }}
-      </pre>
-    </p>
-    {% endfor %}
-
-
-    <h3>Add your comment</h3>
-    <form action="{{ url_for('packages_details', name=result.name) }}/add_comment" method=post>
-        <label for="name">Name:</label>
-        <input id="name" name='fullname'> <br />
-        <label for="email">Email:</label>
-        <input id="email" type='email' name='email'> <br />
-
-        <p>
             Works for me
             <label><input checked="checked" id="working" name="working" type="radio" value="true">Yes</label>
             <label><input id="working" name="working" type="radio" value="false">No</label>
-        </p>
 
-        <p>
             Platform
             <select id="platform" name="platform">
                 <option value="GNU/Linux">GNU/Linux</option>
@@ -69,16 +54,74 @@
                 <option value="Solaris">Solaris</option>
                 <option value="Other">Other</option>
             </select>
-        </p>
 
-        <label for="ver">Version:</label>
-        <input id='ver' name='version'> <br />
-        <label for="comment_body">Comments (optional):</label> <br/>
-        <textarea cols="60" id="comment_body" name="comment" rows="6"></textarea> <br />
-        <label for="cap">Enter the letters here: </label><input id='cap' name='captchavalue'>
-        <img src="{{ url_for('captcha', key=captcha_key) }}"/> <br />
-        <input type=hidden name=captchakey value={{ captcha_key }} />
-        <input type=submit value="Submit" />
-    </form>
+            <label for="ver">Version:</label>
+            <input id='ver' name='version' placeholder="ver.">
+            <label for="comment_body">Comments (optional):</label>
+            <textarea cols="60" id="comment_body" name="comment" rows="6"></textarea>
+            <label for="cap">Enter the letters here: </label><input id='cap' name='captchavalue'>
+            <img src="{{ url_for('captcha', key=captcha_key) }}"/>
+            <input type=hidden name=captchakey value={{ captcha_key }} />
+            <input type=submit value="Submit" />
+        </form>
+    </div>
+
+    <br style="clear: both;">
+
+    <div id="cmnts">
+        <h3>Comments:</h3>
+
+        {% for comment in comments %}
+        <p>
+          <img src="{{comment.email | gravatar}}"/>
+          {{ comment.fullname }} has {{ result.name }} {{ (comment.version) }}
+          <span class="{{ get_status(comment.working)[0] }}">{{ get_status(comment.working)[1] }}</span>
+          on  {{ comment.platform }} : {{ time_delta(comment.datetime) }} <br/>
+          <pre>
+            {{ comment.comment }}
+          </pre>
+        </p>
+        {% endfor %}
+    </div>
 
 {% endblock %}
+
+{% block trypkg %}
+    <ul>
+        <li>
+            {% for distribution in no_comments_packages %}
+            <a href="{{ url_for('packages_details', name=distribution.name) }}">
+            {{ distribution.name }}</a>
+            {% endfor %}
+        </li>
+    </ul>
+{% endblock %}
+
+{% block newprj %}
+    <form action="{{ url_for('save_new_project') }}" method=post>
+        <p>
+            <label for="prjname">Project Name</label>
+            <input id="prjname" name='projectname' placeholder="Project name">
+        </p>
+        <p>
+            <label for="homepg">Homepage</label>
+            <input id="homepg" type='url' name='home_page' placeholder="http://">
+        </p>
+        <p>
+            <label for="auth">Authors</label>
+            <input id="auth" name='author' placeholder="Author(s)">
+        </p>
+        <p>
+            <label for="summary">Summary</label>
+            <textarea id="summary" name='summary' placeholder="Some cool information about your wonderful project..." rows="6" cols="60"></textarea>
+        </p>
+        <p>
+            <label for="cap">Enter the letters here:</label>
+            <input id="cap" name='captchavalue'>
+            <img src="{{ url_for('captcha', key=captcha_key) }}" />
+        </p>
+            <input type=hidden name=captchakey value={{ captcha_key }}>
+            <p><input value="Submit" type="submit"></p>
+    </form>
+{% endblock %}
+

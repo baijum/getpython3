@@ -307,6 +307,21 @@ table#myTable td, table#myTable th{
 table#myTable td{
     border-bottom: 1px outset gray;
 }
+div#data{
+    float:left;
+    width:420px;
+    text-align:left;
+}
+div#addcmnt{
+    float:right;
+    width:420px;
+    text-align:left;
+}
+div#cmnts{
+    float:left;
+    width:100%;
+    text-align:left;
+}
 footer{
     background: #e6e6e6;
     position:relative;

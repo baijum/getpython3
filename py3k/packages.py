@@ -134,12 +134,14 @@ def packages_details(name):
         return redirect(url_for('search_package', name=name, page=1))
     comments = Comment.query.filter_by(distribution_id=result.id).order_by(db.desc(Comment.datetime))
     tags = Tag.query.filter_by(distribution_id=result.id)
+    no_comments_packages = db.session.query(Distribution).outerjoin(Comment).filter(Comment.distribution_id==None).limit(5)
     return render_template('package_details.html',
                            result=result,
                            comments=comments,
                            get_status=get_status,
                            time_delta=pretty_date,
                            tags=tags,
+                           no_comments_packages=no_comments_packages,
                            captcha_key=get_captcha_key())
 
 
