@@ -14,7 +14,6 @@
                 {% else %}
                     <span class=ellipsis>...</span>
                 {% endif %}
-
             {%- endfor %}
         </div>
     {% endmacro %}
@@ -51,3 +50,32 @@
         </li>
     </ul>
 {% endblock %}
+
+{% block newprj %}
+    <form action="{{ url_for('save_new_project') }}" method=post>
+        <p>
+            <label for="prjname">Project Name</label>
+            <input id="prjname" name='projectname' placeholder="Project name">
+        </p>
+        <p>
+            <label for="homepg">Homepage</label>
+            <input id="homepg" type='url' name='home_page' placeholder="http://">
+        </p>
+        <p>
+            <label for="auth">Authors</label>
+            <input id="auth" name='author' placeholder="Author(s)">
+        </p>
+        <p>
+            <label for="summary">Summary</label>
+            <textarea id="summary" name='summary' placeholder="Some cool information about your wonderful project..." rows="6" cols="60"></textarea>
+        </p>
+        <p>
+            <label for="cap">Enter the letters here:</label>
+            <input id="cap" name='captchavalue'>
+            <img src="{{ url_for('captcha', key=captcha_key) }}" />
+        </p>
+            <input type=hidden name=captchakey value={{ captcha_key }}>
+            <p><input value="Submit" type="submit"></p>
+    </form>
+{% endblock %}
+

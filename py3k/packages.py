@@ -147,4 +147,5 @@ def packages(page=1):
         no_comments_packages = db.session.query(Distribution).outerjoin(Comment).filter(Comment.distribution_id==None).limit(5)
         return render_template('show_package.html',
                                 no_comments_packages=no_comments_packages,
+                                captcha_key=get_captcha_key(),
                                 page_obj=result)

@@ -3,19 +3,19 @@
 {% block body %}
 
     {% macro render_pagination(pagination, endpoint) %}
-      <div class=pagination style="font-size: 14pt;text-align:center">
-        {%- for page in pagination.iter_pages() %}
-            {% if page %}
-                {% if page != pagination.page %}
-                    <a href="{{ url_for(endpoint, name=searchname, page=page) }}">{{ page }}</a>
+        <div class=pagination style="font-size: 14pt;text-align:center">
+            {%- for page in pagination.iter_pages() %}
+                {% if page %}
+                    {% if page != pagination.page %}
+                        <a href="{{ url_for(endpoint, name=searchname, page=page) }}">{{ page }}</a>
+                    {% else %}
+                        <strong>{{ page }}</strong>
+                    {% endif %}
                 {% else %}
-                    <strong>{{ page }}</strong>
+                    <span class=ellipsis>...</span>
                 {% endif %}
-            {% else %}
-                <span class=ellipsis>...</span>
-            {% endif %}
-        {%- endfor %}
-      </div>
+            {%- endfor %}
+        </div>
     {% endmacro %}
 
     {{ render_pagination(page_obj, 'search_package') }}
