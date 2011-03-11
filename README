@@ -12,10 +12,13 @@ Installation (GNU/Linux)
 ------------------------
 
 1. Make sure you have Python and virtualenv installed in your system
-2. Run the `bootstrap_run.sh` script (Open this file and read!)
+2. Install freetype development library (libfreetype6-dev in Ubuntu)
+3. Install jpeg development library (libjpeg62-dev in Ubuntu)
+4. Run the `bootstrap_run.sh` script (Open this file and read!)
 
 Note: You should have freefont installed, make sure this file exists:
 /usr/share/fonts/truetype/freefont/FreeSerif.ttf
+If this file is missing, install 'ttf-freefont' (in Ubuntu) package.
 
 Running application
 -------------------
