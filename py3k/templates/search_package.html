@@ -44,12 +44,12 @@
 
 {% block trypkg %}
     <ul>
-        <li>
-            {% for distribution in no_comments_packages %}
-            <a href="{{ url_for('packages_details', name=distribution.name) }}">
-            {{ distribution.name }}</a>
-            {% endfor %}
-        </li>
+        {% for distribution in no_comments_packages %}
+            <li>
+                <a href="{{ url_for('packages_details', name=distribution.name) }}">
+                {{ distribution.name }}</a>
+            </li>
+        {% endfor %}
     </ul>
 {% endblock %}
 
