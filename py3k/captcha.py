@@ -32,7 +32,11 @@ from werkzeug import Headers
 
 import captchaimage
 import cStringIO
-from PIL import Image
+try:
+    from PIL import Image
+except ImportError:
+    import Image
+
 from .application import app
 
 all_keys = {}
