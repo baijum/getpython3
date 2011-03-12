@@ -35,13 +35,13 @@
         <h3>Add your comment</h3>
         <form action="{{ url_for('packages_details', name=result.name) }}/add_comment" method=post id="frm">
             <label for="name">Full Name:</label>
-            <input id="name" name='fullname' placeholder="Your Full Name">
+            <input id="name" name='fullname' placeholder="Your Full Name"><br/>
             <label for="email">Email:</label>
-            <input id="email" type='email' name='email' placeholder="____@____.__">
+            <input id="email" type='email' name='email' placeholder="____@____.__"><br/>
 
             Works for me
             <label><input checked="checked" id="working" name="working" type="radio" value="true">Yes</label>
-            <label><input id="working" name="working" type="radio" value="false">No</label>
+            <label><input id="working" name="working" type="radio" value="false">No</label><br/>
 
             Platform
             <select id="platform" name="platform">
@@ -53,12 +53,12 @@
                 <option value="NetBSD">NetBSD</option>
                 <option value="Solaris">Solaris</option>
                 <option value="Other">Other</option>
-            </select>
+            </select><br/>
 
             <label for="ver">Version:</label>
-            <input id='ver' name='version' placeholder="ver.">
-            <label for="comment_body">Comments (optional):</label>
-            <textarea cols="60" id="comment_body" name="comment" rows="6"></textarea>
+            <input id='ver' name='version' placeholder="ver."><br/>
+            <label for="comment_body">Comments (optional):</label><br/>
+            <textarea cols="53" id="comment_body" name="comment" rows="6"></textarea>
             <label for="cap">Enter the letters here: </label><input id='cap' name='captchavalue'>
             <img src="{{ url_for('captcha', key=captcha_key) }}"/>
             <input type=hidden name=captchakey value={{ captcha_key }} />
@@ -76,10 +76,11 @@
           <img src="{{comment.email | gravatar}}"/>
           {{ comment.fullname }} has {{ result.name }} {{ (comment.version) }}
           <span class="{{ get_status(comment.working)[0] }}">{{ get_status(comment.working)[1] }}</span>
-          on  {{ comment.platform }} : {{ time_delta(comment.datetime) }} <br/>
-          <pre>
-            {{ comment.comment }}
-          </pre>
+          on  {{ comment.platform }} : {{ time_delta(comment.datetime) }} <br/><br/>
+<pre style="clear: left">
+{{ comment.comment }}
+</pre>
+	  <br/>
         </p>
         {% endfor %}
     </div>
